@@ -32,7 +32,7 @@ public class DBManager {
      * 1.构造方法，实现加载驱动，建立连接，创建语句对象
      */
     public DBManager(){
-        dirverName="com.mysql.jdbc.Driver";
+        dirverName="com.mysql.cj.jdbc.Driver";
         url="jdbc:mysql://119.23.225.4/Drug?serverTimezone=UTC";
         username = "Rarcher";
         password = "Rarcher0714";
