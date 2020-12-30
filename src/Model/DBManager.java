@@ -27,11 +27,26 @@ public class DBManager {
     private String username;
     private String password;
 
+
+
+    private static DBManager INSTANCE;
+
+
+    public static DBManager getINSTANCE(){
+        if (INSTANCE == null)
+            INSTANCE = new DBManager();
+        return INSTANCE;
+    }
+
+
+
+
+
     //以下为封装的成员方法
     /*
      * 1.构造方法，实现加载驱动，建立连接，创建语句对象
      */
-    public DBManager(){
+    private DBManager(){
         dirverName="com.mysql.cj.jdbc.Driver";
         url="jdbc:mysql://119.23.225.4/Drug?serverTimezone=UTC";
         username = "Rarcher";
