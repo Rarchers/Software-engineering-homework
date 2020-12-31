@@ -73,8 +73,9 @@ public class StockView extends JFrame {
     }
 
     private void button3ActionPerformed(ActionEvent e) {
-        // 立即查看库存不足
+        new Purchase().setVisible(true);
         closeAll();
+        this.dispose();
     }
 
     private void button4ActionPerformed(ActionEvent e) {
@@ -86,8 +87,9 @@ public class StockView extends JFrame {
         if (!needPurchase){
             None.setVisible(true);
         }else {
-            //TODO 跳转到库存
+            new Purchase().setVisible(true);
             closeAll();
+            this.dispose();
         }
 
     }
@@ -105,23 +107,26 @@ public class StockView extends JFrame {
     }
 
     private void button8ActionPerformed(ActionEvent e) {
-        //立即查看过期
-
-        //closeAll();
+        //查看过期
+        new OverdueView().setVisible(true);
+        closeAll();
+        this.dispose();
     }
 
     private void viewoutdueActionPerformed(ActionEvent e) {
         if (!isOutTime){
             dialog2.setVisible(true);
         }else {
-            //TODO 跳转到过期
+            new OverdueView().setVisible(true);
             closeAll();
+            this.dispose();
         }
 
     }
 
     private void CommonlyActionPerformed(ActionEvent e) {
-        //TODO 常用信息
+        new CommonUse().setVisible(true);
+        this.dispose();
     }
 
     private void initComponents() {

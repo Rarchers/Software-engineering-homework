@@ -1,0 +1,187 @@
+JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.8" encoding: "UTF-8"
+
+new FormModel {
+	"i18n.autoExternalize": true
+	"i18n.bundlePackage": "View"
+	"i18n.bundleName": "form"
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JTable" ) {
+					name: "table1"
+					addEvent( new FormEvent( "java.beans.PropertyChangeListener", "propertyChange", "table1PropertyChange", true ) )
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "table1MouseClicked", true ) )
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridLayout ) {
+				"rows": 17
+			} ) {
+				name: "panel1"
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button1"
+					"text": new FormMessage( null, "button1.text" )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button1ActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button2"
+					"text": new FormMessage( null, "button2.text" )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label4"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label5"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label6"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label7"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label8"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label9"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label10"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label11"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label12"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label13"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label14"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label15"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label19"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label20"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "backtostock"
+					"text": new FormMessage( null, "backtostock.text" )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "backtostockActionPerformed", true ) )
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "West"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label21"
+				"text": new FormMessage( null, "label21.text" )
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "North"
+			} )
+			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
+				name: "menuBar1"
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "menu1"
+					"text": new FormMessage( null, "menu1.text_2" )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem1"
+						"text": new FormMessage( null, "menuItem1.text" )
+					} )
+				} )
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 105, 50 )
+			"size": new java.awt.Dimension( 775, 570 )
+		} )
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "dialog1"
+			"$sizePolicy": 1
+			addEvent( new FormEvent( "java.beans.PropertyChangeListener", "propertyChange", "dialog1PropertyChange", true ) )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridLayout ) {
+				"rows": 0
+				"columns": 2
+			} ) {
+				name: "panel3"
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button5"
+					"text": new FormMessage( null, "button5.text_2" )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button5ActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button6"
+					"text": new FormMessage( null, "button6.text" )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button6ActionPerformed", true ) )
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "South"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": new FormMessage( null, "label1.text" )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "North"
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridLayout ) {
+				"rows": 2
+			} ) {
+				name: "panel4"
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+					name: "panel5"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label2"
+						"text": new FormMessage( null, "label2.text" )
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "West"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label3"
+						"text": new FormMessage( null, "label3.text" )
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "Center"
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+					name: "panel6"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label16"
+						"text": new FormMessage( null, "label16.text" )
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "West"
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "textField1"
+						"cursor": new java.awt.Cursor( 2 )
+						addEvent( new FormEvent( "java.awt.event.KeyListener", "keyTyped", "textField1KeyTyped", true ) )
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "Center"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label17"
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "North"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label18"
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "South"
+					} )
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 140, 645 )
+			"size": new java.awt.Dimension( 255, 200 )
+		} )
+	}
+}
