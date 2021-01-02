@@ -53,6 +53,12 @@ public class Purchase extends JFrame {
 
     private void button5ActionPerformed(ActionEvent e) {
         Purchase.purchaseMap.put(selectName,Integer.parseInt(textField1.getText()));
+        try{
+            DBManager.getINSTANCE().executeUpdate("update Purchase set Num = \""+textField1.getText()+"\" where MedName = \""+selectName+"\"");
+        }catch (Exception e1){
+            e1.printStackTrace();
+        }
+
         initTable(table1);
         dialog1.dispose();
     }
@@ -347,10 +353,11 @@ public class Purchase extends JFrame {
             while (rs.next()){
                 String medName = rs.getString("MedName");
                 arr[j][0] = medName;
+                int num = rs.getInt("Num");
                 if (!Purchase.purchaseMap.containsKey(medName)){
-                    Purchase.purchaseMap.put(medName,50);
+                    Purchase.purchaseMap.put(medName,num);
                 }
-                arr[j][1] = Purchase.purchaseMap.get(medName);
+                arr[j][1] = num;
                 j++;
             }
         } catch (Exception e) {

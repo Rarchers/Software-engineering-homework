@@ -646,7 +646,7 @@ public class StockView extends JFrame {
             for (String key : purchaseMap.keySet()){
                 ResultSet rs =  DBManager.getINSTANCE().executeQuery("select * from Purchase where MedName = \""+key+"\"");
                 if (!rs.next()){
-                    String insert = "insert into Purchase (MedName) values (\""+key+"\")";
+                    String insert = "insert into Purchase (MedName,Num) values (\""+key+"\",50)";
                     DBManager.getINSTANCE().executeUpdate(insert);
                 }
             }
