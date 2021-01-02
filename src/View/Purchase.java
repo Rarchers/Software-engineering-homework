@@ -336,9 +336,11 @@ public class Purchase extends JFrame {
         Object[][] arr = new Object[0][];
         String sql = "select * from Purchase";
         try{
+            ResultSet rs1 = DBManager.getINSTANCE().executeQuery(sql);
+            rs1.last();
+            int count = rs1.getRow();
+            rs1.close();
             ResultSet rs = DBManager.getINSTANCE().executeQuery(sql);
-            ResultSetMetaData metaData = rs.getMetaData();
-            int count = metaData.getColumnCount();
             System.out.println("[*]正在查询数据库 当前执行sql语句"+sql);
             arr = new Object[count + 1][2];
             int j = 0;

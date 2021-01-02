@@ -57,9 +57,9 @@ public class StockView extends JFrame {
     }
 
     private void table1PropertyChange(PropertyChangeEvent e) {
-        System.out.println("[*] table1PropertyChange");
+     /*   System.out.println("[*] table1PropertyChange");
         initTable(table1,1,"");
-        showError();
+        showError();*/
     }
 
     private void searchActionPerformed(ActionEvent e) {
@@ -84,13 +84,11 @@ public class StockView extends JFrame {
 
     private void button5ActionPerformed(ActionEvent e) {
         // 查看库存不足
-        if (!needPurchase){
-            None.setVisible(true);
-        }else {
+
             new Purchase().setVisible(true);
             closeAll();
             this.dispose();
-        }
+
 
     }
 
@@ -114,13 +112,11 @@ public class StockView extends JFrame {
     }
 
     private void viewoutdueActionPerformed(ActionEvent e) {
-        if (!isOutTime){
-            dialog2.setVisible(true);
-        }else {
+
             new OverdueView().setVisible(true);
             closeAll();
             this.dispose();
-        }
+
 
     }
 
@@ -504,7 +500,7 @@ public class StockView extends JFrame {
     private Date Today = new Date();
     private void initTable(JTable table1,int type,String drugName){
 
-        String[] list = {"药品编号", "药品名称", "生产日期","过期日期", "剩余库存"};
+        String[] list = {"药品编号", "药品名称", "入库日期","过期日期", "剩余库存"};
         DefaultTableModel model = (DefaultTableModel) table1.getModel();
         model.setRowCount(0);
         model.setColumnCount(0);
@@ -518,9 +514,7 @@ public class StockView extends JFrame {
         }
         //System.out.println(arr[0][0]);
 
-        if (arr[0][0] == null){
-            showError = true;
-        }
+
         for (Object[] i : arr)
             model.addRow(i);
         table1.setEnabled(false);
@@ -533,9 +527,12 @@ public class StockView extends JFrame {
         Object[][] arr = new Object[0][];
         String sql = "select * from drug";
         try{
+            ResultSet rs1 = DBManager.getINSTANCE().executeQuery(sql);
+            rs1.last();
+            int count = rs1.getRow();
+            rs1.close();
             ResultSet rs = DBManager.getINSTANCE().executeQuery(sql);
-            ResultSetMetaData metaData = rs.getMetaData();
-            int count = metaData.getColumnCount();
+            System.out.println(count);
             System.out.println("[*]正在查询数据库 当前执行sql语句"+sql);
             arr = new Object[count + 1][5];
             int j = 0;
@@ -545,13 +542,13 @@ public class StockView extends JFrame {
                 String inTime = rs.getString("InTime");
                 String outTime = rs.getString("OutTime");
                 int num = rs.getInt("Num");
+                //System.out.println(num);
                 drugMap.put(medName,drugMap.getOrDefault(medName,0)+num);
                 Date ot = df.parse(outTime);
                 if (ot.before(Today)) {
                     outDue.put(medName,num);
-                    DBManager.getINSTANCE().executeUpdate("delete from drug where MedID = \""+medID+"\"");
+                   // DBManager.getINSTANCE().executeUpdate("delete from drug where MedID = \""+medID+"\"");
                 }
-
                 arr[j][0] = medID;
                 arr[j][1] = medName;
                 arr[j][2] = inTime;
@@ -559,12 +556,19 @@ public class StockView extends JFrame {
                 arr[j][4] = num;
                 j++;
             }
+            rs.close();
+            for (String key:outDue.keySet()){
+                DBManager.getINSTANCE().executeUpdate("delete from drug where medName = \""+key+"\"");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
 
+
+
         for (String key : drugMap.keySet()){
+            System.out.println("key "+key+"value "+drugMap.get(key));
             if (drugMap.get(key)<10)
                 purchaseMap.put(key,drugMap.get(key));
         }
@@ -594,7 +598,7 @@ public class StockView extends JFrame {
                 String inTime = rs.getString("InTime");
                 String outTime = rs.getString("OutTime");
                 int num = rs.getInt("Num");
-                if (drugName.equals(medName)){
+                if (medName.contains(drugName)){
                     arr[j][0] = medID;
                     arr[j][1] = medName;
                     arr[j][2] = inTime;
@@ -632,7 +636,8 @@ public class StockView extends JFrame {
         try {
            // DBManager.getINSTANCE().executeUpdate(sql);
             for (String key : outDue.keySet()){
-                String insert = "insert into overdue (MedID,OverdueNum) values (\""+key+"\","+outDue.get(key)+")";
+                System.out.println("插入值："+key+" len "+key.length()+"res "+outDue.get(key));
+                String insert = "insert into overdue (MedName,OverdueNum) values (\""+key+"\","+outDue.get(key)+")";
                 DBManager.getINSTANCE().executeUpdate(insert);
             }
         }catch (Exception e){

@@ -59,7 +59,8 @@ public class DBManager {
             else
                 System.out.println("failed connected");
             //3.创建语句对象
-            stm = con.createStatement();
+            stm = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
         } catch (Exception e) {
 
             e.printStackTrace();
