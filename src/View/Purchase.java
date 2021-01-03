@@ -53,6 +53,12 @@ public class Purchase extends JFrame {
 
     private void button5ActionPerformed(ActionEvent e) {
         Purchase.purchaseMap.put(selectName,Integer.parseInt(textField1.getText()));
+        try{
+            DBManager.getINSTANCE().executeUpdate("update Purchase set Num = \""+textField1.getText()+"\" where MedName = \""+selectName+"\"");
+        }catch (Exception e1){
+            e1.printStackTrace();
+        }
+
         initTable(table1);
         dialog1.dispose();
     }
@@ -150,13 +156,12 @@ public class Purchase extends JFrame {
 
         //======== panel1 ========
         {
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax
-            . swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing
-            . border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .
-            Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red
-            ) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override
-            public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .equals (e .getPropertyName (
-            ) )) throw new RuntimeException( ); }} );
+            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border
+            .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn" , javax. swing .border . TitledBorder. CENTER ,javax
+            . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,
+            12 ) ,java . awt. Color .red ) ,panel1. getBorder () ) ); panel1. addPropertyChangeListener( new java. beans
+            .PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062ord\u0065r" .equals ( e.
+            getPropertyName () ) )throw new RuntimeException( ) ;} } );
             panel1.setLayout(new GridLayout(17, 0));
 
             //---- button1 ----
@@ -204,13 +209,12 @@ public class Purchase extends JFrame {
 
             //======== panel3 ========
             {
-                panel3.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing
-                . border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder
-                . CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .
-                awt .Font .BOLD ,12 ), java. awt. Color. red) ,panel3. getBorder( )) )
-                ; panel3. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
-                ) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} )
-                ;
+                panel3.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border
+                .EmptyBorder(0,0,0,0), "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e",javax.swing.border.TitledBorder.CENTER,javax
+                .swing.border.TitledBorder.BOTTOM,new java.awt.Font("Dialo\u0067",java.awt.Font.BOLD,
+                12),java.awt.Color.red),panel3. getBorder()));panel3. addPropertyChangeListener(new java.beans
+                .PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("borde\u0072".equals(e.
+                getPropertyName()))throw new RuntimeException();}});
                 panel3.setLayout(new GridLayout(0, 2));
 
                 //---- button5 ----
@@ -338,19 +342,22 @@ public class Purchase extends JFrame {
         Object[][] arr = new Object[0][];
         String sql = "select * from Purchase";
         try{
+            ResultSet rs1 = DBManager.getINSTANCE().executeQuery(sql);
+            rs1.last();
+            int count = rs1.getRow();
+            rs1.close();
             ResultSet rs = DBManager.getINSTANCE().executeQuery(sql);
-            ResultSetMetaData metaData = rs.getMetaData();
-            int count = metaData.getColumnCount();
             System.out.println("[*]正在查询数据库 当前执行sql语句"+sql);
             arr = new Object[count + 1][2];
             int j = 0;
             while (rs.next()){
                 String medName = rs.getString("MedName");
                 arr[j][0] = medName;
+                int num = rs.getInt("Num");
                 if (!Purchase.purchaseMap.containsKey(medName)){
-                    Purchase.purchaseMap.put(medName,50);
+                    Purchase.purchaseMap.put(medName,num);
                 }
-                arr[j][1] = Purchase.purchaseMap.get(medName);
+                arr[j][1] = num;
                 j++;
             }
         } catch (Exception e) {

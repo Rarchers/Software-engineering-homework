@@ -11,5 +11,7 @@
     <orderEntry type="library" name="mysql-connector-java-8.0.22" level="project" />
     <orderEntry type="library" name="TableLayout" level="project" />
     <orderEntry type="library" name="IntelliJ IDEA GridLayout" level="project" />
+    <orderEntry type="library" name="poi-ooxml-3.11-20141221" level="project" />
+    <orderEntry type="library" name="poi-excelant-3.11-20141221" level="project" />
   </component>
 </module>

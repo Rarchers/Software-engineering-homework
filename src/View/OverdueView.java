@@ -95,13 +95,11 @@ public class OverdueView extends JFrame {
 
         //======== panel1 ========
         {
-            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax
-            .swing.border.EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing
-            .border.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM,new java.awt.
-            Font("Dia\u006cog",java.awt.Font.BOLD,12),java.awt.Color.red
-            ),panel1. getBorder()));panel1. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override
-            public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062ord\u0065r".equals(e.getPropertyName(
-            )))throw new RuntimeException();}});
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder(
+            0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder
+            . BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt. Color.
+            red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .
+            beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
             panel1.setLayout(new GridLayout(17, 0));
 
             //---- button2 ----
@@ -190,9 +188,11 @@ public class OverdueView extends JFrame {
         Object[][] arr = new Object[0][];
         String sql = "select * from overdue";
         try{
+            ResultSet rs1 = DBManager.getINSTANCE().executeQuery(sql);
+            rs1.last();
+            int count = rs1.getRow();
+            rs1.close();
             ResultSet rs = DBManager.getINSTANCE().executeQuery(sql);
-            ResultSetMetaData metaData = rs.getMetaData();
-            int count = metaData.getColumnCount();
             System.out.println("[*]正在查询数据库 当前执行sql语句"+sql);
             arr = new Object[count + 1][2];
             int j = 0;
