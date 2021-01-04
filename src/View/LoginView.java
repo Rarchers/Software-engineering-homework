@@ -14,7 +14,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
 /**
@@ -26,7 +25,9 @@ public class LoginView extends JFrame {
     }
 
     private void button2ActionPerformed(ActionEvent e) {
-
+        Dialog.dispose();
+        textField1.setText("");
+        passwordField1.setText("");
     }
 
     private void buttonBarMouseClicked(MouseEvent e) {
@@ -38,10 +39,10 @@ public class LoginView extends JFrame {
 
         // 检查登记条件
         String ID = textField1.getText();
-        String password = Arrays.toString(passwordField1.getPassword());
+        String password = passwordField1.getText();
+        System.out.println(password);
         if(checkID(ID)) {
             if(check(ID,password)){
-
                 if(gettype(ID).equals("员工"))
                 {
                     new CustomerR().setVisible(true);
@@ -90,7 +91,7 @@ public class LoginView extends JFrame {
     private boolean check(String ID,String password){
         //String sql = "delete from overdue";
         try {
-            ResultSet rs = DBManager.getINSTANCE().executeQuery("select WorkerPassword from worker where WorkerID = \"" + ID + "\"");
+            ResultSet rs = DBManager.getINSTANCE().executeQuery("select * from worker where WorkerID = \"" + ID + "\"");
             if(rs.next()){
                 if(rs.getString("WorkerPassword").equals(password))
                 return true;
@@ -142,6 +143,17 @@ public class LoginView extends JFrame {
             Dialog1.dispose();
 
     }
+
+    private void button3ActionPerformed(ActionEvent e) {
+        passwordField1.setText("");
+        Dialog1.dispose();
+    }
+
+    private void button4ActionPerformed(ActionEvent e) {
+        textField1.setText("");
+        passwordField1.setText("");
+        Dialog2.dispose();
+    }
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
@@ -182,12 +194,12 @@ public class LoginView extends JFrame {
         //======== dialogPane ========
         {
             dialogPane.setBorder(new EmptyBorder(12, 12, 12, 12));
-            dialogPane.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax
-            . swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing
-            . border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .
-            Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red
-            ) ,dialogPane. getBorder( )) ); dialogPane. addPropertyChangeListener (e -> {if ("\u0062or\u0064er" .equals (e .getPropertyName (
-            ) )) throw new RuntimeException( ); });
+            dialogPane.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.
+            border.EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing.border.TitledBorder.CENTER
+            ,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog",java.awt.Font
+            .BOLD,12),java.awt.Color.red),dialogPane. getBorder()));dialogPane. addPropertyChangeListener(
+            new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062ord\u0065r"
+            .equals(e.getPropertyName()))throw new RuntimeException();}});
             dialogPane.setLayout(new BorderLayout());
 
             //======== contentPanel ========
@@ -266,14 +278,14 @@ public class LoginView extends JFrame {
 
                 //---- okButton ----
                 okButton.setText(bundle.getString("okButton.text"));
-                okButton.addActionListener(this::okButtonActionPerformed);
+                okButton.addActionListener(e -> okButtonActionPerformed(e));
                 buttonBar.add(okButton, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                     new Insets(0, 0, 0, 5), 0, 0));
 
                 //---- cancelButton ----
                 cancelButton.setText(bundle.getString("cancelButton.text"));
-                cancelButton.addActionListener(this::cancelButtonActionPerformed);
+                cancelButton.addActionListener(e -> cancelButtonActionPerformed(e));
                 buttonBar.add(cancelButton, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                     new Insets(0, 0, 0, 0), 0, 0));
@@ -292,7 +304,10 @@ public class LoginView extends JFrame {
 
             //---- button2 ----
             button2.setText("\u91cd\u65b0\u767b\u5f55");
-            button2.addActionListener(this::button2ActionPerformed);
+            button2.addActionListener(e -> {
+			button2ActionPerformed(e);
+			button2ActionPerformed(e);
+		});
             DialogContentPane.add(button2, BorderLayout.PAGE_END);
 
             //---- label3 ----
@@ -316,7 +331,10 @@ public class LoginView extends JFrame {
 
             //---- button3 ----
             button3.setText("\u91cd\u65b0\u767b\u5f55");
-            button3.addActionListener(this::button2ActionPerformed);
+            button3.addActionListener(e -> {
+			button2ActionPerformed(e);
+			button3ActionPerformed(e);
+		});
             Dialog1ContentPane.add(button3, BorderLayout.PAGE_END);
 
             //---- label5 ----
@@ -340,7 +358,10 @@ public class LoginView extends JFrame {
 
             //---- button4 ----
             button4.setText("\u91cd\u65b0\u767b\u5f55");
-            button4.addActionListener(this::button2ActionPerformed);
+            button4.addActionListener(e -> {
+			button2ActionPerformed(e);
+			button4ActionPerformed(e);
+		});
             Dialog2ContentPane.add(button4, BorderLayout.PAGE_END);
 
             //---- label7 ----
