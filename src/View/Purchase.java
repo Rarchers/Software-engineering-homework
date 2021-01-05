@@ -78,7 +78,7 @@ public class Purchase extends JFrame {
     }
 
     private void button2ActionPerformed(ActionEvent e) {
-        new Check().setVisible(true);
+        new Purchase().setVisible(true);
         this.dispose();
     }
 
@@ -161,12 +161,12 @@ public class Purchase extends JFrame {
 
         //======== panel1 ========
         {
-            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder
-            (0,0,0,0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion",javax.swing.border.TitledBorder.CENTER,javax.swing.border
-            .TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog",java.awt.Font.BOLD,12),java.awt
-            .Color.red),panel1. getBorder()));panel1. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void
-            propertyChange(java.beans.PropertyChangeEvent e){if("bord\u0065r".equals(e.getPropertyName()))throw new RuntimeException()
-            ;}});
+            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.
+            EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing.border.TitledBorder.CENTER,javax.swing
+            .border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog",java.awt.Font.BOLD,12),
+            java.awt.Color.red),panel1. getBorder()));panel1. addPropertyChangeListener(new java.beans.PropertyChangeListener()
+            {@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062ord\u0065r".equals(e.getPropertyName()))
+            throw new RuntimeException();}});
             panel1.setLayout(new GridLayout(17, 0));
 
             //---- button1 ----
@@ -209,18 +209,21 @@ public class Purchase extends JFrame {
 
         //======== dialog1 ========
         {
+            dialog1.setTitle(bundle.getString("dialog1.title"));
             dialog1.addPropertyChangeListener(e -> dialog1PropertyChange(e));
             var dialog1ContentPane = dialog1.getContentPane();
             dialog1ContentPane.setLayout(new BorderLayout());
 
             //======== panel3 ========
             {
-                panel3.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing.
-                border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmDes\u0069gner \u0045valua\u0074ion" , javax. swing .border . TitledBorder. CENTER
-                ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "D\u0069alog", java .awt . Font
-                . BOLD ,12 ) ,java . awt. Color .red ) ,panel3. getBorder () ) ); panel3. addPropertyChangeListener(
-                new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062order"
-                .equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
+                panel3.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(
+                new javax.swing.border.EmptyBorder(0,0,0,0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion"
+                ,javax.swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM
+                ,new java.awt.Font("Dia\u006cog",java.awt.Font.BOLD,12)
+                ,java.awt.Color.red),panel3. getBorder()));panel3. addPropertyChangeListener(
+                new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e
+                ){if("bord\u0065r".equals(e.getPropertyName()))throw new RuntimeException()
+                ;}});
                 panel3.setLayout(new GridLayout(0, 2));
 
                 //---- button5 ----

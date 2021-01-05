@@ -97,13 +97,13 @@ public class CommonUse extends JFrame {
 
         //======== panel1 ========
         {
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax.
-            swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing. border
-            . TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069al\u006fg"
-            ,java .awt .Font .BOLD ,12 ), java. awt. Color. red) ,panel1. getBorder
-            ( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java
-            .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er" .equals (e .getPropertyName () )) throw new RuntimeException
-            ( ); }} );
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing
+            . border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder
+            . CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .
+            awt .Font .BOLD ,12 ), java. awt. Color. red) ,panel1. getBorder( )) )
+            ; panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
+            ) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} )
+            ;
             panel1.setLayout(new GridLayout(17, 0));
 
             //---- button1 ----
@@ -200,10 +200,6 @@ public class CommonUse extends JFrame {
         Object[][] arr = new Object[0][];
         String sql = "select * from sell";
         try{
-            ResultSet rs1 = DBManager.getINSTANCE().executeQuery(sql);
-            rs1.last();
-            int count = rs1.getRow();
-            rs1.close();
             ResultSet rs = DBManager.getINSTANCE().executeQuery(sql);
             System.out.println("[*]正在查询数据库 当前执行sql语句"+sql);
 
@@ -212,21 +208,35 @@ public class CommonUse extends JFrame {
                 String medName = rs.getString("MedName");
                 String SellTime = rs.getString("SellTime");
                 int SellNum = rs.getInt("SellNum");
+               // System.out.println("medNam :"+medName+" sellTime: "+SellTime+" num:"+SellNum);
                 Date ot = df.parse(SellTime);
                 if (before7days.getTime()<=ot.getTime()){ //7天之内
                  sellMap.put(medName,sellMap.getOrDefault(medName,0)+SellNum);
+                   // System.out.println("adding!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 }
                // arr[j][0] = medName;
                // arr[j][1] = SellTime;
                 //j++;
             }
-            arr = new Object[sellMap.size()+1][2];
-            int j = 0;
+            int count = 0;
             for (String key : sellMap.keySet()){
                 if (sellMap.get(key)>=50){
+                    count++;
+                }
+            }
+
+
+            arr = new Object[count][2];
+            System.out.println(sellMap.size());
+            int j = -1;
+            for (String key : sellMap.keySet()){
+                if (sellMap.get(key)>=50){
+                    j++;
                     arr[j][0] = key;
                     arr[j][1] = sellMap.get(key);
+
                 }
+
             }
 
         } catch (Exception e) {

@@ -107,6 +107,7 @@ new FormModel {
 		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 			name: "dialog1"
 			"$sizePolicy": 1
+			"title": new FormMessage( null, "dialog1.title" )
 			addEvent( new FormEvent( "java.beans.PropertyChangeListener", "propertyChange", "dialog1PropertyChange", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridLayout ) {
 				"rows": 0
@@ -181,7 +182,7 @@ new FormModel {
 				"value": "Center"
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 140, 645 )
+			"location": new java.awt.Point( 110, 645 )
 			"size": new java.awt.Dimension( 255, 200 )
 		} )
 	}
