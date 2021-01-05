@@ -127,6 +127,7 @@ public class PutIn extends JFrame {
         System.out.println("insert into drug (medname,intime,outtime,num) values('"+selectName+"','"+intime+"','"+outime+"',"+num+")");
         try{//填入药品信息表
             DBManager.getINSTANCE().executeUpdate("insert into drug (medid,medname,intime,outtime,num) values('"+Medid+"','"+selectName+"','"+intime+"','"+outime+"',"+num+")");
+            //DBManager.getINSTANCE().executeUpdate("delete form checks where medname='"+selectName+"'");
         }catch (Exception q){
             q.printStackTrace();
         }
@@ -152,12 +153,12 @@ public class PutIn extends JFrame {
         // TODO add your code here
     }
 
-    private void button1MouseClicked(MouseEvent e) {
+   /* private void button1MouseClicked(MouseEvent e) {
         int k=0,c=0;
         table1.setValueAt("abc",k,c);
         c++;
         table1.setValueAt(50,k,c);
-    }
+    }*/
 
 
 
@@ -206,10 +207,7 @@ public class PutIn extends JFrame {
             button1.setText("\u5237\u65b0");
             button1.addActionListener(e -> button1ActionPerformed(e));
             button1.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    button1MouseClicked(e);
-                }
+
             });
             panel1.add(button1);
 
