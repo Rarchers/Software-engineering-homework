@@ -172,14 +172,25 @@ public class workerR extends JFrame {
     private void button11ActionPerformed(ActionEvent e) {
         Dialog4.dispose();
     }
+
+    private void menuItem4ActionPerformed(ActionEvent e) {
+        this.dispose();
+        new LoginView().setVisible(true);
+    }
+
+    private void menuItem5ActionPerformed(ActionEvent e) {
+        System.exit(0);
+    }
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
         menuBar1 = new JMenuBar();
         menu1 = new JMenu();
-        menuItem1 = new JMenuItem();
         menuItem2 = new JMenuItem();
         menuItem3 = new JMenuItem();
+        menu2 = new JMenu();
+        menuItem4 = new JMenuItem();
+        menuItem5 = new JMenuItem();
         label1 = new JLabel();
         panel5 = new JPanel();
         button1 = new JButton();
@@ -235,11 +246,6 @@ public class workerR extends JFrame {
             {
                 menu1.setText("\u754c\u9762\u5207\u6362");
 
-                //---- menuItem1 ----
-                menuItem1.setText("\u4fe1\u606f\u6ce8\u518c");
-                menuItem1.addActionListener(e -> menuItem1ActionPerformed(e));
-                menu1.add(menuItem1);
-
                 //---- menuItem2 ----
                 menuItem2.setText("\u4fe1\u606f\u4fee\u6539");
                 menuItem2.addActionListener(e -> menuItem2ActionPerformed(e));
@@ -251,6 +257,22 @@ public class workerR extends JFrame {
                 menu1.add(menuItem3);
             }
             menuBar1.add(menu1);
+
+            //======== menu2 ========
+            {
+                menu2.setText("\u8bbe\u7f6e");
+
+                //---- menuItem4 ----
+                menuItem4.setText("\u767b\u51fa");
+                menuItem4.addActionListener(e -> menuItem4ActionPerformed(e));
+                menu2.add(menuItem4);
+
+                //---- menuItem5 ----
+                menuItem5.setText("\u9000\u51fa\u7cfb\u7edf");
+                menuItem5.addActionListener(e -> menuItem5ActionPerformed(e));
+                menu2.add(menuItem5);
+            }
+            menuBar1.add(menu2);
         }
         setJMenuBar(menuBar1);
 
@@ -262,13 +284,13 @@ public class workerR extends JFrame {
 
         //======== panel5 ========
         {
-            panel5.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax
-            . swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e", javax. swing
-            . border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .
-            Font ("Dialo\u0067" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red
-            ) ,panel5. getBorder( )) ); panel5. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override
-            public void propertyChange (java .beans .PropertyChangeEvent e) {if ("borde\u0072" .equals (e .getPropertyName (
-            ) )) throw new RuntimeException( ); }} );
+            panel5.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new
+            javax.swing.border.EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax
+            .swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM,new java
+            .awt.Font("Dia\u006cog",java.awt.Font.BOLD,12),java.awt
+            .Color.red),panel5. getBorder()));panel5. addPropertyChangeListener(new java.beans.
+            PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062ord\u0065r".
+            equals(e.getPropertyName()))throw new RuntimeException();}});
             panel5.setLayout(new GridLayout(0, 2));
 
             //---- button1 ----
@@ -382,12 +404,12 @@ public class workerR extends JFrame {
 
             //======== panel12 ========
             {
-                panel12.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing.
-                border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER
-                , javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font
-                .BOLD ,12 ), java. awt. Color. red) ,panel12. getBorder( )) ); panel12. addPropertyChangeListener (
-                new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order"
-                .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+                panel12.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .
+                EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn" , javax. swing .border . TitledBorder. CENTER ,javax . swing
+                . border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,
+                java . awt. Color .red ) ,panel12. getBorder () ) ); panel12. addPropertyChangeListener( new java. beans .PropertyChangeListener ( )
+                { @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062ord\u0065r" .equals ( e. getPropertyName () ) )
+                throw new RuntimeException( ) ;} } );
                 panel12.setLayout(new BorderLayout());
 
                 //======== scrollPane3 ========
@@ -476,13 +498,13 @@ public class workerR extends JFrame {
 
             //======== panel14 ========
             {
-                panel14.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
-                javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax
-                . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
-                .awt .Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,12 ), java. awt
-                . Color. red) ,panel14. getBorder( )) ); panel14. addPropertyChangeListener (new java. beans.
-                PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er" .
-                equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+                panel14.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax.
+                swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e", javax. swing. border
+                . TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dialo\u0067"
+                ,java .awt .Font .BOLD ,12 ), java. awt. Color. red) ,panel14. getBorder
+                ( )) ); panel14. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java
+                .beans .PropertyChangeEvent e) {if ("borde\u0072" .equals (e .getPropertyName () )) throw new RuntimeException
+                ( ); }} );
                 panel14.setLayout(new GridLayout(1, 2));
 
                 //---- button8 ----
@@ -552,9 +574,11 @@ public class workerR extends JFrame {
     // Generated using JFormDesigner Evaluation license - unknown
     private JMenuBar menuBar1;
     private JMenu menu1;
-    private JMenuItem menuItem1;
     private JMenuItem menuItem2;
     private JMenuItem menuItem3;
+    private JMenu menu2;
+    private JMenuItem menuItem4;
+    private JMenuItem menuItem5;
     private JLabel label1;
     private JPanel panel5;
     private JButton button1;

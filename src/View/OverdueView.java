@@ -36,6 +36,26 @@ public class OverdueView extends JFrame {
         initTable(table1);
     }
 
+    private void menuItem1ActionPerformed(ActionEvent e) {
+        new LoginView().setVisible(true);
+        this.dispose();
+    }
+
+    private void menuItem2ActionPerformed(ActionEvent e) {
+        System.exit(0);
+    }
+
+    private void button3ActionPerformed(ActionEvent e) {
+        try {
+                String purchase = "delete from overdue";
+                DBManager.getINSTANCE().executeUpdate(purchase);
+                initTable(table1);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - rarcher
@@ -43,6 +63,7 @@ public class OverdueView extends JFrame {
         menuBar1 = new JMenuBar();
         menu1 = new JMenu();
         menuItem1 = new JMenuItem();
+        menuItem2 = new JMenuItem();
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
         panel1 = new JPanel();
@@ -78,7 +99,13 @@ public class OverdueView extends JFrame {
 
                 //---- menuItem1 ----
                 menuItem1.setText(bundle.getString("menuItem1.text_2"));
+                menuItem1.addActionListener(e -> menuItem1ActionPerformed(e));
                 menu1.add(menuItem1);
+
+                //---- menuItem2 ----
+                menuItem2.setText(bundle.getString("menuItem2.text_2"));
+                menuItem2.addActionListener(e -> menuItem2ActionPerformed(e));
+                menu1.add(menuItem2);
             }
             menuBar1.add(menu1);
         }
@@ -95,11 +122,13 @@ public class OverdueView extends JFrame {
 
         //======== panel1 ========
         {
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder(
-            0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder
-            . BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt. Color.
-            red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .
-            beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
+            javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax
+            . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
+            .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt
+            . Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans.
+            PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .
+            equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
             panel1.setLayout(new GridLayout(17, 0));
 
             //---- button2 ----
@@ -109,6 +138,7 @@ public class OverdueView extends JFrame {
 
             //---- button3 ----
             button3.setText(bundle.getString("button3.text"));
+            button3.addActionListener(e -> button3ActionPerformed(e));
             panel1.add(button3);
             panel1.add(label3);
             panel1.add(label4);
@@ -146,6 +176,7 @@ public class OverdueView extends JFrame {
     private JMenuBar menuBar1;
     private JMenu menu1;
     private JMenuItem menuItem1;
+    private JMenuItem menuItem2;
     private JScrollPane scrollPane1;
     private JTable table1;
     private JPanel panel1;

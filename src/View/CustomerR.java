@@ -65,8 +65,6 @@ public class CustomerR extends JFrame {
     }
 
     private void comboBox2ActionPerformed(ActionEvent e) {
-        textField1.setText("");
-        textField4.setText("");
     }
 
     private void initTable(JTable table1,String CustomerID,String name,String sex,String phone){
@@ -91,14 +89,20 @@ public class CustomerR extends JFrame {
         table1.setEnabled(false);
     }
 
-    private void button3ActionPerformed(ActionEvent e) throws SQLException {
+    private void button3ActionPerformed(ActionEvent e) {
         dialog1.dispose();
         String name =textField1.getText();
         String sex=comboBox2.getSelectedItem().toString();
         String phone=textField4.getText();
         String CustomerID = table1.getValueAt(0,0).toString();
         String sql = "insert into Customer (CustomerID,CustomerName,CustomerSex,CustomerPhone) values (\""+CustomerID+"\",\""+name+"\",\""+sex+"\",\""+phone+"\")";
-        boolean res = DBManager.getINSTANCE().executeUpdate(sql);
+        boolean res= false;
+        try{
+            res = DBManager.getINSTANCE().executeUpdate(sql);
+        }catch (Exception ea){
+            ea.printStackTrace();
+        }
+
         if(res){
             Dialog.setVisible(true);
         }
@@ -109,7 +113,6 @@ public class CustomerR extends JFrame {
 
     private void button4ActionPerformed(ActionEvent e) {
         dialog1.dispose();
-        new CustomerR().setVisible(true);
     }
 
     private void button5ActionPerformed(ActionEvent e) {
@@ -118,14 +121,21 @@ public class CustomerR extends JFrame {
         Dialog.dispose();
     }
 
-    private void button6ActionPerformed(ActionEvent e) throws SQLException {
+    private void button6ActionPerformed(ActionEvent e) {
         Dialog2.dispose();
         String name =textField1.getText();
         String sex=comboBox2.getSelectedItem().toString();
         String phone=textField4.getText();
         String CustomerID = table1.getValueAt(0,0).toString();
         String sql = "insert into Customer (CustomerID,CustomerName,CustomerSex,CustomerPhone) values (\""+CustomerID+"\",\""+name+"\",\""+sex+"\",\""+phone+"\")";
-        boolean res = DBManager.getINSTANCE().executeUpdate(sql);
+        boolean res = false;
+        try{
+            res = DBManager.getINSTANCE().executeUpdate(sql);
+        }
+        catch (Exception sd){
+            sd.printStackTrace();
+        }
+
         if(res){
             Dialog.setVisible(true);
         }
@@ -143,8 +153,7 @@ public class CustomerR extends JFrame {
 
     private void menuItem1ActionPerformed(ActionEvent e) {
         this.dispose();
-
-        new CustomerR().setVisible(true);
+        new LoginView().setVisible(true);
     }
 
     private void menuItem2ActionPerformed(ActionEvent e) {
@@ -165,14 +174,20 @@ public class CustomerR extends JFrame {
     private void button9ActionPerformed(ActionEvent e) {
         Dialog4.dispose();
     }
+
+    private void menuItem4ActionPerformed(ActionEvent e) {
+        System.exit(0);
+    }
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
         menuBar1 = new JMenuBar();
         menu1 = new JMenu();
-        menuItem1 = new JMenuItem();
         menuItem2 = new JMenuItem();
         menuItem3 = new JMenuItem();
+        menu2 = new JMenu();
+        menuItem1 = new JMenuItem();
+        menuItem4 = new JMenuItem();
         label1 = new JLabel();
         panel5 = new JPanel();
         button1 = new JButton();
@@ -225,14 +240,6 @@ public class CustomerR extends JFrame {
             {
                 menu1.setText("\u754c\u9762\u5207\u6362");
 
-                //---- menuItem1 ----
-                menuItem1.setText("\u4fe1\u606f\u6ce8\u518c");
-                menuItem1.addActionListener(e -> {
-			menuItem1ActionPerformed(e);
-			menuItem1ActionPerformed(e);
-		});
-                menu1.add(menuItem1);
-
                 //---- menuItem2 ----
                 menuItem2.setText("\u4fe1\u606f\u4fee\u6539");
                 menuItem2.addActionListener(e -> menuItem2ActionPerformed(e));
@@ -244,6 +251,22 @@ public class CustomerR extends JFrame {
                 menu1.add(menuItem3);
             }
             menuBar1.add(menu1);
+
+            //======== menu2 ========
+            {
+                menu2.setText("\u8bbe\u7f6e");
+
+                //---- menuItem1 ----
+                menuItem1.setText("\u767b\u51fa");
+                menuItem1.addActionListener(e -> menuItem1ActionPerformed(e));
+                menu2.add(menuItem1);
+
+                //---- menuItem4 ----
+                menuItem4.setText("\u9000\u51fa\u7cfb\u7edf");
+                menuItem4.addActionListener(e -> menuItem4ActionPerformed(e));
+                menu2.add(menuItem4);
+            }
+            menuBar1.add(menu2);
         }
         setJMenuBar(menuBar1);
 
@@ -343,7 +366,7 @@ public class CustomerR extends JFrame {
             panel1.add(panel4);
         }
         contentPane.add(panel1, BorderLayout.CENTER);
-        pack();
+        setSize(400, 300);
         setLocationRelativeTo(getOwner());
 
         //======== dialog1 ========
@@ -353,12 +376,12 @@ public class CustomerR extends JFrame {
 
             //======== panel6 ========
             {
-                panel6.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border
-                .EmptyBorder ( 0, 0 ,0 , 0) ,  "JFor\u006dDesi\u0067ner \u0045valu\u0061tion" , javax. swing .border . TitledBorder. CENTER ,javax
-                . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,
-                12 ) ,java . awt. Color .red ) ,panel6. getBorder () ) ); panel6. addPropertyChangeListener( new java. beans
-                .PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "bord\u0065r" .equals ( e.
-                getPropertyName () ) )throw new RuntimeException( ) ;} } );
+                panel6.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.
+                EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing.border.TitledBorder.CENTER,javax.swing
+                .border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog",java.awt.Font.BOLD,12),
+                java.awt.Color.red),panel6. getBorder()));panel6. addPropertyChangeListener(new java.beans.PropertyChangeListener()
+                {@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062ord\u0065r".equals(e.getPropertyName()))
+                throw new RuntimeException();}});
                 panel6.setLayout(new BorderLayout());
 
                 //======== scrollPane2 ========
@@ -394,13 +417,7 @@ public class CustomerR extends JFrame {
 
                 //---- button3 ----
                 button3.setText("OK");
-                button3.addActionListener(e -> {
-                    try {
-                        button3ActionPerformed(e);
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                    }
-                });
+                button3.addActionListener(e -> button3ActionPerformed(e));
                 panel7.add(button3);
 
                 //---- button4 ----
@@ -447,24 +464,19 @@ public class CustomerR extends JFrame {
 
             //======== panel11 ========
             {
-                panel11.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new
-                javax . swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e" , javax
-                . swing .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java
-                . awt .Font ( "D\u0069al\u006fg", java .awt . Font. BOLD ,12 ) ,java . awt
-                . Color .red ) ,panel11. getBorder () ) ); panel11. addPropertyChangeListener( new java. beans .
-                PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062or\u0064er" .
-                equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
+                panel11.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (
+                new javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion"
+                , javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM
+                , new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 )
+                , java. awt. Color. red) ,panel11. getBorder( )) ); panel11. addPropertyChangeListener (
+                new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
+                ) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( )
+                ; }} );
                 panel11.setLayout(new GridLayout(1, 2));
 
                 //---- button6 ----
                 button6.setText("\u518d\u6b21\u5c1d\u8bd5");
-                button6.addActionListener(e -> {
-                    try {
-                        button6ActionPerformed(e);
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                    }
-                });
+                button6.addActionListener(e -> button6ActionPerformed(e));
                 panel11.add(button6);
 
                 //---- button7 ----
@@ -523,9 +535,11 @@ public class CustomerR extends JFrame {
     // Generated using JFormDesigner Evaluation license - unknown
     private JMenuBar menuBar1;
     private JMenu menu1;
-    private JMenuItem menuItem1;
     private JMenuItem menuItem2;
     private JMenuItem menuItem3;
+    private JMenu menu2;
+    private JMenuItem menuItem1;
+    private JMenuItem menuItem4;
     private JLabel label1;
     private JPanel panel5;
     private JButton button1;
