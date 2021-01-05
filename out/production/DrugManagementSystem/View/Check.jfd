@@ -20,7 +20,6 @@ new FormModel {
 					name: "button1"
 					"text": "刷新"
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button1ActionPerformed", true ) )
-					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "button1MouseClicked", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "button2"
@@ -36,11 +35,8 @@ new FormModel {
 					name: "textField4"
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "textField4ActionPerformed", true ) )
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "textField4ActionPerformed", true ) )
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button10"
-					"text": "确定"
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button10ActionPerformed", true ) )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "textField4ActionPerformed", true ) )
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "textField4MouseClicked", true ) )
 				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "West"
@@ -54,6 +50,23 @@ new FormModel {
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "Center"
 			} )
+			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
+				name: "menuBar1"
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "menu1"
+					"text": "设置"
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem2"
+						"text": "登出"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItem2ActionPerformed", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem3"
+						"text": "退出系统"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "menuItem3ActionPerformed", true ) )
+					} )
+				} )
+			}
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
 			"size": new java.awt.Dimension( 660, 435 )
@@ -259,6 +272,69 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 555, 815 )
+			"size": new java.awt.Dimension( 200, 200 )
+		} )
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "dialog5"
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button11"
+				"text": "确定"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button11ActionPerformed", true ) )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "South"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label16"
+				"text": "退货信息填写不合法请重新填写！"
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 90, 1000 )
+			"size": new java.awt.Dimension( 200, 200 )
+		} )
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "dialog6"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label17"
+				"text": "请填写员工号！"
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button12"
+				"text": "确定"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button12ActionPerformed", true ) )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "South"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 340, 1005 )
+			"size": new java.awt.Dimension( 200, 200 )
+		} )
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "dialog7"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label18"
+				"text": "填写员工号："
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "North"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "textField5"
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button13"
+				"text": "确定"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button13ActionPerformed", true ) )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "South"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 625, 1055 )
 			"size": new java.awt.Dimension( 200, 200 )
 		} )
 	}

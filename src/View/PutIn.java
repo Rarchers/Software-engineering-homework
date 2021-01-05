@@ -28,6 +28,7 @@ public class PutIn extends JFrame {
 
 
     private void button1ActionPerformed(ActionEvent e) {
+
         initTable(table1);
     }
 
@@ -62,9 +63,14 @@ public class PutIn extends JFrame {
                 while (rs.next()){
                     String medName = rs.getString("MedName");
                     String InNum = rs.getString("InNum");
-                    arr[j][0] = medName;
-                    arr[j][1] = InNum;
-                    j++;
+                    if(Integer.parseInt(InNum)==0){
+                        j++;
+                    }else{
+                        arr[j][0] = medName;
+                        arr[j][1] = InNum;
+                        j++;
+                    }
+
                 }
 
         } catch (Exception e) {
@@ -99,6 +105,8 @@ public class PutIn extends JFrame {
     }
 
     private void button2ActionPerformed(ActionEvent e) {
+        Check ca=new Check();
+        ca.setVisible(true);
         this.dispose();
     }
 
@@ -163,6 +171,15 @@ public class PutIn extends JFrame {
         // TODO add your code here
     }
 
+    private void menuItem1ActionPerformed(ActionEvent e) {
+        LoginView lo=new LoginView();
+        lo.setVisible(true);
+    }
+
+    private void menuItem2ActionPerformed(ActionEvent e) {
+        System.exit(0);
+    }
+
    /* private void button1MouseClicked(MouseEvent e) {
         int k=0,c=0;
         table1.setValueAt("abc",k,c);
@@ -175,6 +192,10 @@ public class PutIn extends JFrame {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - yufei
+        menuBar1 = new JMenuBar();
+        menu1 = new JMenu();
+        menuItem1 = new JMenuItem();
+        menuItem2 = new JMenuItem();
         label1 = new JLabel();
         panel1 = new JPanel();
         button1 = new JButton();
@@ -198,6 +219,27 @@ public class PutIn extends JFrame {
         var contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
+        //======== menuBar1 ========
+        {
+
+            //======== menu1 ========
+            {
+                menu1.setText("\u8bbe\u7f6e");
+
+                //---- menuItem1 ----
+                menuItem1.setText("\u767b\u51fa");
+                menuItem1.addActionListener(e -> menuItem1ActionPerformed(e));
+                menu1.add(menuItem1);
+
+                //---- menuItem2 ----
+                menuItem2.setText("\u9000\u51fa\u7cfb\u7edf");
+                menuItem2.addActionListener(e -> menuItem2ActionPerformed(e));
+                menu1.add(menuItem2);
+            }
+            menuBar1.add(menu1);
+        }
+        setJMenuBar(menuBar1);
+
         //---- label1 ----
         label1.setText("\u836f\u54c1\u4fe1\u606f\u5f55\u5165");
         label1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -205,13 +247,13 @@ public class PutIn extends JFrame {
 
         //======== panel1 ========
         {
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
-            javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax
-            . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
-            .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
-            . Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans.
-            PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .
-            equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new
+            javax.swing.border.EmptyBorder(0,0,0,0), "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e",javax
+            .swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM,new java
+            .awt.Font("D\u0069al\u006fg",java.awt.Font.BOLD,12),java.awt
+            .Color.red),panel1. getBorder()));panel1. addPropertyChangeListener(new java.beans.
+            PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062or\u0064er".
+            equals(e.getPropertyName()))throw new RuntimeException();}});
             panel1.setLayout(new GridLayout(10, 0));
 
             //---- button1 ----
@@ -266,11 +308,12 @@ public class PutIn extends JFrame {
 
             //======== panel2 ========
             {
-                panel2.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .EmptyBorder ( 0
-                , 0 ,0 , 0) ,  "JF\u006frmDes\u0069gner \u0045valua\u0074ion" , javax. swing .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM
-                , new java. awt .Font ( "D\u0069alog", java .awt . Font. BOLD ,12 ) ,java . awt. Color .red ) ,
-                panel2. getBorder () ) ); panel2. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e
-                ) { if( "\u0062order" .equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
+                panel2.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing.
+                border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder. CENTER
+                , javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font
+                .BOLD ,12 ), java. awt. Color. red) ,panel2. getBorder( )) ); panel2. addPropertyChangeListener (
+                new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r"
+                .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
                 panel2.setLayout(new GridLayout(3, 0));
 
                 //======== panel3 ========
@@ -334,6 +377,10 @@ public class PutIn extends JFrame {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - yufei
+    private JMenuBar menuBar1;
+    private JMenu menu1;
+    private JMenuItem menuItem1;
+    private JMenuItem menuItem2;
     private JLabel label1;
     private JPanel panel1;
     private JButton button1;
