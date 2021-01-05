@@ -35,6 +35,12 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "textField4"
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "textField4ActionPerformed", true ) )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "textField4ActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button10"
+					"text": "确定"
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button10ActionPerformed", true ) )
 				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "West"
@@ -99,8 +105,6 @@ new FormModel {
 						name: "button3"
 						"text": "确定"
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button3ActionPerformed", true ) )
-						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button3ActionPerformed", true ) )
-						addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "button3MouseClicked", true ) )
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "button4"
@@ -236,6 +240,26 @@ new FormModel {
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 85, 735 )
 			"size": new java.awt.Dimension( 320, 245 )
+		} )
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "dialog4"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label15"
+				"text": "员工号不合法请重新填写！"
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button9"
+				"text": "确定"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button9ActionPerformed", true ) )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "South"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 555, 815 )
+			"size": new java.awt.Dimension( 200, 200 )
 		} )
 	}
 }

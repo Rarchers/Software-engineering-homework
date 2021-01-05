@@ -127,7 +127,13 @@ public class PutIn extends JFrame {
         System.out.println("insert into drug (medname,intime,outtime,num) values('"+selectName+"','"+intime+"','"+outime+"',"+num+")");
         try{//填入药品信息表
             DBManager.getINSTANCE().executeUpdate("insert into drug (medid,medname,intime,outtime,num) values('"+Medid+"','"+selectName+"','"+intime+"','"+outime+"',"+num+")");
-            //DBManager.getINSTANCE().executeUpdate("delete form checks where medname='"+selectName+"'");
+            ResultSet rs = DBManager.getINSTANCE().executeQuery("select * from checks where medname='"+selectName+"'");
+            int id=0 ;
+            if(rs.next())
+            {
+                id = rs.getInt("id");
+            }
+            DBManager.getINSTANCE().executeUpdate("delete from checks where id="+id);
         }catch (Exception q){
             q.printStackTrace();
         }
@@ -150,6 +156,10 @@ public class PutIn extends JFrame {
         return sb.toString();
     }
     private void button2MouseClicked(MouseEvent e) {
+        // TODO add your code here
+    }
+
+    private void button1MouseClicked(MouseEvent e) {
         // TODO add your code here
     }
 
@@ -195,19 +205,23 @@ public class PutIn extends JFrame {
 
         //======== panel1 ========
         {
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
-            EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax. swing
-            . border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ),
-            java. awt. Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( )
-            { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .getPropertyName () ))
-            throw new RuntimeException( ); }} );
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
+            javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax
+            . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
+            .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
+            . Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans.
+            PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .
+            equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
             panel1.setLayout(new GridLayout(10, 0));
 
             //---- button1 ----
             button1.setText("\u5237\u65b0");
             button1.addActionListener(e -> button1ActionPerformed(e));
             button1.addMouseListener(new MouseAdapter() {
-
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    button1MouseClicked(e);
+                }
             });
             panel1.add(button1);
 
@@ -252,11 +266,11 @@ public class PutIn extends JFrame {
 
             //======== panel2 ========
             {
-                panel2.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder(
-                0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder
-                . BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt. Color.
-                red) ,panel2. getBorder( )) ); panel2. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .
-                beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+                panel2.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .EmptyBorder ( 0
+                , 0 ,0 , 0) ,  "JF\u006frmDes\u0069gner \u0045valua\u0074ion" , javax. swing .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM
+                , new java. awt .Font ( "D\u0069alog", java .awt . Font. BOLD ,12 ) ,java . awt. Color .red ) ,
+                panel2. getBorder () ) ); panel2. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e
+                ) { if( "\u0062order" .equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
                 panel2.setLayout(new GridLayout(3, 0));
 
                 //======== panel3 ========
