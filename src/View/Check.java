@@ -206,16 +206,20 @@ public class Check extends JFrame {
             for(int i=0;i<rows;i++){
                 int c2,c3,c4;
                 String c1,c5;
-                c1=table1.getValueAt(i,c).toString();//药品名称
+                c1 = table1.getValueAt(i,c) == null ? "" :table1.getValueAt(i,c).toString();
+                //c1=table1.getValueAt(i,c).toString();//药品名称
                 System.out.println(c1);
                 c++;
-                c2=Integer.parseInt(table1.getValueAt(i,c).toString());//订货数量
+                c2 = table1.getValueAt(i,c) == null ? 0 : Integer.parseInt(table1.getValueAt(i,c).toString());
+               // c2=Integer.parseInt(table1.getValueAt(i,c).toString());//订货数量
                 System.out.println(c2);
                 c++;
-                c3=Integer.parseInt(table1.getValueAt(i,c).toString());//到货数量
+                c3 = table1.getValueAt(i,c) == null ? 0 : Integer.parseInt(table1.getValueAt(i,c).toString());
+               // c3=Integer.parseInt(table1.getValueAt(i,c).toString());//到货数量
                 System.out.println(c3);
                 c++;
-                c4=Integer.parseInt(table1.getValueAt(i,c).toString());//退货数量
+                c4 = table1.getValueAt(i,c) == null ? 0 : Integer.parseInt(table1.getValueAt(i,c).toString());
+                //c4=Integer.parseInt(table1.getValueAt(i,c).toString());//退货数量
                 System.out.println(c4);
                 if(c4!=0){
                 c3=c3-c4;//验收数量

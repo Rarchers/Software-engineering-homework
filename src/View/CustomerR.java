@@ -23,7 +23,7 @@ public class CustomerR extends JFrame {
     private String gettime() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyMMddHHmm");
         Date data = new Date(System.currentTimeMillis());
-        String CustomerID = formatter.format(data);
+        String CustomerID = formatter.format(data).toString();
         return CustomerID;
     }
 
@@ -65,7 +65,8 @@ public class CustomerR extends JFrame {
     }
 
     private void comboBox2ActionPerformed(ActionEvent e) {
-
+        textField1.setText("");
+        textField4.setText("");
     }
 
     private void initTable(JTable table1,String CustomerID,String name,String sex,String phone){
