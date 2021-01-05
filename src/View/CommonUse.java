@@ -39,11 +39,8 @@ public class CommonUse extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - rarcher
+        // Generated using JFormDesigner Evaluation license - unknown
         ResourceBundle bundle = ResourceBundle.getBundle("View.form");
-        menuBar1 = new JMenuBar();
-        menu1 = new JMenu();
-        menuItem1 = new JMenuItem();
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
         panel1 = new JPanel();
@@ -71,21 +68,6 @@ public class CommonUse extends JFrame {
         var contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
-        //======== menuBar1 ========
-        {
-
-            //======== menu1 ========
-            {
-                menu1.setText(bundle.getString("menu1.text_4"));
-
-                //---- menuItem1 ----
-                menuItem1.setText(bundle.getString("menuItem1.text_3"));
-                menu1.add(menuItem1);
-            }
-            menuBar1.add(menu1);
-        }
-        setJMenuBar(menuBar1);
-
         //======== scrollPane1 ========
         {
 
@@ -97,13 +79,13 @@ public class CommonUse extends JFrame {
 
         //======== panel1 ========
         {
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing
-            . border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder
-            . CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .
-            awt .Font .BOLD ,12 ), java. awt. Color. red) ,panel1. getBorder( )) )
-            ; panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
-            ) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} )
-            ;
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
+            javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax
+            . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
+            .awt .Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,12 ), java. awt
+            . Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans.
+            PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er" .
+            equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
             panel1.setLayout(new GridLayout(17, 0));
 
             //---- button1 ----
@@ -146,10 +128,7 @@ public class CommonUse extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - rarcher
-    private JMenuBar menuBar1;
-    private JMenu menu1;
-    private JMenuItem menuItem1;
+    // Generated using JFormDesigner Evaluation license - unknown
     private JScrollPane scrollPane1;
     private JTable table1;
     private JPanel panel1;

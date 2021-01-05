@@ -175,7 +175,6 @@ public class Judge extends JFrame {
         ResultSet rs = null;
         try {
             rs = DBManager.getINSTANCE().executeQuery("select * from Customer where CustomerID = \""+ID+"\"");
-
             if(rs.next()) {
                 rs =  DBManager.getINSTANCE().executeQuery("select * from worker where WorkerID = \""+ID1+"\"");
                 if(rs.next()){
@@ -187,8 +186,15 @@ public class Judge extends JFrame {
                         else{
                             rs =  DBManager.getINSTANCE().executeQuery("select * from Drug where MedName = \""+Medname+"\"");
                             if(rs.next()){
-                                dialog2.setVisible(true);
-                                initTable1(table2);
+                                int mnum = rs.getInt("Num");
+                                if(mnum < Integer.parseInt(textField4.getText()))
+                                {
+                                    Dialog7.setVisible(true);
+                                }
+                                else{
+                                    dialog2.setVisible(true);
+                                    initTable1(table2);
+                                }
                             }
                             else{
                                 Dialog5.setVisible(true);
@@ -328,7 +334,7 @@ public class Judge extends JFrame {
     }
 
     private void button12ActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        Dialog7.dispose();
     }
 
     private void button14ActionPerformed(ActionEvent e) {
@@ -352,20 +358,26 @@ public class Judge extends JFrame {
 
     private void menuItem1ActionPerformed(ActionEvent e) {
         this.dispose();
-        new Judge().setVisible(true);
+        new LoginView().setVisible(true);
     }
 
     private void menuItem2ActionPerformed(ActionEvent e) {
         new StockView().setVisible(true);
         this.dispose();
     }
+
+    private void menuItem3ActionPerformed(ActionEvent e) {
+        System.exit(0);
+    }
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - rarcher
+        // Generated using JFormDesigner Evaluation license - unknown
         menuBar1 = new JMenuBar();
         menu1 = new JMenu();
-        menuItem1 = new JMenuItem();
         menuItem2 = new JMenuItem();
+        menu2 = new JMenu();
+        menuItem1 = new JMenuItem();
+        menuItem3 = new JMenuItem();
         label1 = new JLabel();
         panel5 = new JPanel();
         button1 = new JButton();
@@ -428,6 +440,9 @@ public class Judge extends JFrame {
         panel13 = new JPanel();
         button17 = new JButton();
         button18 = new JButton();
+        Dialog7 = new JDialog();
+        button12 = new JButton();
+        label13 = new JLabel();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -440,17 +455,28 @@ public class Judge extends JFrame {
             {
                 menu1.setText("\u754c\u9762\u5207\u6362");
 
-                //---- menuItem1 ----
-                menuItem1.setText("\u836f\u54c1\u9500\u552e");
-                menuItem1.addActionListener(e -> menuItem1ActionPerformed(e));
-                menu1.add(menuItem1);
-
                 //---- menuItem2 ----
                 menuItem2.setText("\u836f\u54c1\u67e5\u8be2");
                 menuItem2.addActionListener(e -> menuItem2ActionPerformed(e));
                 menu1.add(menuItem2);
             }
             menuBar1.add(menu1);
+
+            //======== menu2 ========
+            {
+                menu2.setText("\u8bbe\u7f6e");
+
+                //---- menuItem1 ----
+                menuItem1.setText("\u767b\u51fa");
+                menuItem1.addActionListener(e -> menuItem1ActionPerformed(e));
+                menu2.add(menuItem1);
+
+                //---- menuItem3 ----
+                menuItem3.setText("\u9000\u51fa\u7cfb\u7edf");
+                menuItem3.addActionListener(e -> menuItem3ActionPerformed(e));
+                menu2.add(menuItem3);
+            }
+            menuBar1.add(menu2);
         }
         setJMenuBar(menuBar1);
 
@@ -462,12 +488,13 @@ public class Judge extends JFrame {
 
         //======== panel5 ========
         {
-            panel5.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .
-            EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e" , javax. swing .border . TitledBorder. CENTER ,javax . swing
-            . border .TitledBorder . BOTTOM, new java. awt .Font ( "D\u0069al\u006fg", java .awt . Font. BOLD ,12 ) ,
-            java . awt. Color .red ) ,panel5. getBorder () ) ); panel5. addPropertyChangeListener( new java. beans .PropertyChangeListener ( )
-            { @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062or\u0064er" .equals ( e. getPropertyName () ) )
-            throw new RuntimeException( ) ;} } );
+            panel5.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax
+            . swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing
+            . border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .
+            Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red
+            ) ,panel5. getBorder( )) ); panel5. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override
+            public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .equals (e .getPropertyName (
+            ) )) throw new RuntimeException( ); }} );
             panel5.setLayout(new GridLayout(0, 2));
 
             //---- button1 ----
@@ -561,13 +588,13 @@ public class Judge extends JFrame {
 
             //======== panel6 ========
             {
-                panel6.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax
-                . swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn" , javax. swing
-                .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .
-                Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,java . awt. Color .red
-                ) ,panel6. getBorder () ) ); panel6. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override
-                public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062ord\u0065r" .equals ( e. getPropertyName (
-                ) ) )throw new RuntimeException( ) ;} } );
+                panel6.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax
+                .swing.border.EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing
+                .border.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM,new java.awt.
+                Font("Dia\u006cog",java.awt.Font.BOLD,12),java.awt.Color.red
+                ),panel6. getBorder()));panel6. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override
+                public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062ord\u0065r".equals(e.getPropertyName(
+                )))throw new RuntimeException();}});
                 panel6.setLayout(new GridLayout(1, 1));
 
                 //======== scrollPane2 ========
@@ -623,13 +650,13 @@ public class Judge extends JFrame {
 
             //======== panel11 ========
             {
-                panel11.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax
-                . swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmDes\u0069gner \u0045valua\u0074ion" , javax. swing
-                .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .
-                Font ( "D\u0069alog", java .awt . Font. BOLD ,12 ) ,java . awt. Color .red
-                ) ,panel11. getBorder () ) ); panel11. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override
-                public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062order" .equals ( e. getPropertyName (
-                ) ) )throw new RuntimeException( ) ;} } );
+                panel11.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax
+                . swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing
+                . border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .
+                Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red
+                ) ,panel11. getBorder( )) ); panel11. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override
+                public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .getPropertyName (
+                ) )) throw new RuntimeException( ); }} );
                 panel11.setLayout(new GridLayout(1, 2));
 
                 //---- button6 ----
@@ -654,12 +681,12 @@ public class Judge extends JFrame {
 
             //======== panel9 ========
             {
-                panel9.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder
-                ( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing. border
-                . TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
-                . Color. red) ,panel9. getBorder( )) ); panel9. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void
-                propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( )
-                ; }} );
+                panel9.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing.
+                border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER
+                , javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font
+                .BOLD ,12 ), java. awt. Color. red) ,panel9. getBorder( )) ); panel9. addPropertyChangeListener (
+                new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r"
+                .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
                 panel9.setLayout(new BorderLayout());
 
                 //======== scrollPane3 ========
@@ -793,12 +820,13 @@ public class Judge extends JFrame {
 
             //======== panel12 ========
             {
-                panel12.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing.
-                border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder. CENTER
-                , javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font
-                .BOLD ,12 ), java. awt. Color. red) ,panel12. getBorder( )) ); panel12. addPropertyChangeListener (
-                new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r"
-                .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+                panel12.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing
+                . border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing. border. TitledBorder
+                . CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069al\u006fg" ,java .
+                awt .Font .BOLD ,12 ), java. awt. Color. red) ,panel12. getBorder( )) )
+                ; panel12. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
+                ) {if ("\u0062or\u0064er" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} )
+                ;
                 panel12.setLayout(new GridLayout(1, 2));
 
                 //---- button15 ----
@@ -830,12 +858,12 @@ public class Judge extends JFrame {
 
             //======== panel13 ========
             {
-                panel13.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing
-                .border.EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing.border.TitledBorder
-                .CENTER,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog",java.
-                awt.Font.BOLD,12),java.awt.Color.red),panel13. getBorder()))
-                ;panel13. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e
-                ){if("\u0062ord\u0065r".equals(e.getPropertyName()))throw new RuntimeException();}})
+                panel13.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing
+                . border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder
+                . CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .
+                awt .Font .BOLD ,12 ), java. awt. Color. red) ,panel13. getBorder( )) )
+                ; panel13. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
+                ) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} )
                 ;
                 panel13.setLayout(new GridLayout(1, 2));
 
@@ -853,15 +881,37 @@ public class Judge extends JFrame {
             Dialog11.setSize(180, 185);
             Dialog11.setLocationRelativeTo(null);
         }
+
+        //======== Dialog7 ========
+        {
+            Dialog7.setAlwaysOnTop(true);
+            var Dialog7ContentPane = Dialog7.getContentPane();
+            Dialog7ContentPane.setLayout(new BorderLayout());
+
+            //---- button12 ----
+            button12.setText("\u8fd4\u56de\u9500\u552e\u754c\u9762");
+            button12.addActionListener(e -> button12ActionPerformed(e));
+            Dialog7ContentPane.add(button12, BorderLayout.PAGE_END);
+
+            //---- label13 ----
+            label13.setText("\u836f\u54c1\u6570\u91cf\u4e0d\u53ef\u4ee5\u591a\u4e8e\u5e93\u5b58\u91cf\uff01");
+            label13.setFont(label13.getFont().deriveFont(label13.getFont().getSize() + 1f));
+            label13.setHorizontalAlignment(SwingConstants.CENTER);
+            Dialog7ContentPane.add(label13, BorderLayout.CENTER);
+            Dialog7.setSize(200, 195);
+            Dialog7.setLocationRelativeTo(null);
+        }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - rarcher
+    // Generated using JFormDesigner Evaluation license - unknown
     private JMenuBar menuBar1;
     private JMenu menu1;
-    private JMenuItem menuItem1;
     private JMenuItem menuItem2;
+    private JMenu menu2;
+    private JMenuItem menuItem1;
+    private JMenuItem menuItem3;
     private JLabel label1;
     private JPanel panel5;
     private JButton button1;
@@ -924,5 +974,8 @@ public class Judge extends JFrame {
     private JPanel panel13;
     private JButton button17;
     private JButton button18;
+    private JDialog Dialog7;
+    private JButton button12;
+    private JLabel label13;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
