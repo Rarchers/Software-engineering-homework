@@ -1,10 +1,7 @@
 
 import Been.DrugBeen;
 import Model.DBManager;
-import View.Check;
-import View.CommonUse;
-import View.LoginView;
-import View.StockView;
+import View.*;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -32,13 +29,14 @@ public class Test {
 //        }
 
        // new Purchase().setVisible(true);
-       /* ArrayList<DrugBeen> list = new Test().ReadFromExcel("D:\\data.xls");
+        /*ArrayList<DrugBeen> list = new Test().ReadFromExcel("D:\\data.xls");
 
         int i = 0;
         for (DrugBeen drugBeen : list){
             String medID = getMedID();
             ResultSet rs =  DBManager.getINSTANCE().executeQuery("select * from Drug where MedID = \""+medID+"\"");
-            while (rs.next()&&i<=1000){
+            while (rs.next()){
+                if (i>=1000)break;
                 medID = getMedID();
                 rs =  DBManager.getINSTANCE().executeQuery("select * from Drug where MedID = \""+medID+"\"");
             }
