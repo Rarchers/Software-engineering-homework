@@ -32,7 +32,8 @@ public class CustomerC extends JFrame {
 
     private void searchActionPerformed(ActionEvent e) throws SQLException {
         if(searchedit.getText().equals("")){
-            Dialog3.setVisible(true);
+            //Dialog3.setVisible(true);
+            initTableAll(table1);
         }
         else{
             initTable(table1,comboBox1.getSelectedItem().toString(),searchedit.getText());
@@ -90,6 +91,40 @@ public class CustomerC extends JFrame {
         table1.setEnabled(false);
 
     }
+
+
+
+
+
+    private void initTableAll(JTable table1) throws SQLException {
+
+        String[] list = {"顾客ID", "顾客姓名","顾客性别","顾客电话"};
+        DefaultTableModel model = (DefaultTableModel) table1.getModel();
+        model.setRowCount(0);
+        model.setColumnCount(0);
+        for(String i : list)
+            model.addColumn(i);
+        Object[][] arr;
+        arr = new Object[100][4];
+        int j=0;
+        System.out.println("select * from Customer");
+        ResultSet rs =  DBManager.getINSTANCE().executeQuery("select * from Customer");
+        while(rs.next()) {
+            arr[j][0] = rs.getString("CustomerID");
+            arr[j][1] = rs.getString("CustomerName");
+            arr[j][2] = rs.getString("CustomerSex");
+            arr[j][3]= rs.getString("CustomerPhone");
+            //System.out.println(arr[0][0]);
+            j++;
+        }
+        rs.close();
+        for (Object[] i : arr)
+            model.addRow(i);
+        table1.setEnabled(false);
+
+    }
+
+
 
     private void button2ActionPerformed(ActionEvent e) {
         // TODO add your code here

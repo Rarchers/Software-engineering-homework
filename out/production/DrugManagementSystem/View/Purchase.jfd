@@ -89,17 +89,6 @@ new FormModel {
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "North"
 			} )
-			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
-				name: "menuBar1"
-				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
-					name: "menu1"
-					"text": new FormMessage( null, "menu1.text_2" )
-					add( new FormComponent( "javax.swing.JMenuItem" ) {
-						name: "menuItem1"
-						"text": new FormMessage( null, "menuItem1.text" )
-					} )
-				} )
-			}
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 105, 50 )
 			"size": new java.awt.Dimension( 775, 570 )
@@ -184,6 +173,26 @@ new FormModel {
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 110, 645 )
 			"size": new java.awt.Dimension( 255, 200 )
+		} )
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "dialog2"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label22"
+				"text": new FormMessage( null, "label22.text" )
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button3"
+				"text": new FormMessage( null, "button3.text_2" )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button3ActionPerformed", true ) )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "South"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 605, 645 )
+			"size": new java.awt.Dimension( 200, 200 )
 		} )
 	}
 }

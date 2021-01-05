@@ -78,7 +78,11 @@ public class Purchase extends JFrame {
     }
 
     private void button2ActionPerformed(ActionEvent e) {
-        new Purchase().setVisible(true);
+        new JDialog().setVisible(true);
+
+    }
+
+    private void button3ActionPerformed(ActionEvent e) {
         this.dispose();
     }
 
@@ -86,9 +90,6 @@ public class Purchase extends JFrame {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - rarcher
         ResourceBundle bundle = ResourceBundle.getBundle("View.form");
-        menuBar1 = new JMenuBar();
-        menu1 = new JMenu();
-        menuItem1 = new JMenuItem();
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
         panel1 = new JPanel();
@@ -124,25 +125,13 @@ public class Purchase extends JFrame {
         textField1 = new JTextField();
         label17 = new JLabel();
         label18 = new JLabel();
+        dialog2 = new JDialog();
+        label22 = new JLabel();
+        button3 = new JButton();
 
         //======== this ========
         var contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
-
-        //======== menuBar1 ========
-        {
-
-            //======== menu1 ========
-            {
-                menu1.setText(bundle.getString("menu1.text_2"));
-
-                //---- menuItem1 ----
-                menuItem1.setText(bundle.getString("menuItem1.text"));
-                menu1.add(menuItem1);
-            }
-            menuBar1.add(menu1);
-        }
-        setJMenuBar(menuBar1);
 
         //======== scrollPane1 ========
         {
@@ -161,12 +150,13 @@ public class Purchase extends JFrame {
 
         //======== panel1 ========
         {
-            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.
-            EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing.border.TitledBorder.CENTER,javax.swing
-            .border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog",java.awt.Font.BOLD,12),
-            java.awt.Color.red),panel1. getBorder()));panel1. addPropertyChangeListener(new java.beans.PropertyChangeListener()
-            {@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062ord\u0065r".equals(e.getPropertyName()))
-            throw new RuntimeException();}});
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax
+            . swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing
+            . border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .
+            Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red
+            ) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override
+            public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er" .equals (e .getPropertyName (
+            ) )) throw new RuntimeException( ); }} );
             panel1.setLayout(new GridLayout(17, 0));
 
             //---- button1 ----
@@ -216,14 +206,12 @@ public class Purchase extends JFrame {
 
             //======== panel3 ========
             {
-                panel3.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(
-                new javax.swing.border.EmptyBorder(0,0,0,0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion"
-                ,javax.swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM
-                ,new java.awt.Font("Dia\u006cog",java.awt.Font.BOLD,12)
-                ,java.awt.Color.red),panel3. getBorder()));panel3. addPropertyChangeListener(
-                new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e
-                ){if("bord\u0065r".equals(e.getPropertyName()))throw new RuntimeException()
-                ;}});
+                panel3.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
+                EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e", javax. swing. border. TitledBorder. CENTER, javax. swing
+                . border. TitledBorder. BOTTOM, new java .awt .Font ("Dialo\u0067" ,java .awt .Font .BOLD ,12 ),
+                java. awt. Color. red) ,panel3. getBorder( )) ); panel3. addPropertyChangeListener (new java. beans. PropertyChangeListener( )
+                { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("borde\u0072" .equals (e .getPropertyName () ))
+                throw new RuntimeException( ); }} );
                 panel3.setLayout(new GridLayout(0, 2));
 
                 //---- button5 ----
@@ -286,14 +274,29 @@ public class Purchase extends JFrame {
             dialog1.setSize(255, 200);
             dialog1.setLocationRelativeTo(dialog1.getOwner());
         }
+
+        //======== dialog2 ========
+        {
+            var dialog2ContentPane = dialog2.getContentPane();
+            dialog2ContentPane.setLayout(new BorderLayout());
+
+            //---- label22 ----
+            label22.setText(bundle.getString("label22.text"));
+            label22.setHorizontalAlignment(SwingConstants.CENTER);
+            dialog2ContentPane.add(label22, BorderLayout.CENTER);
+
+            //---- button3 ----
+            button3.setText(bundle.getString("button3.text_2"));
+            button3.addActionListener(e -> button3ActionPerformed(e));
+            dialog2ContentPane.add(button3, BorderLayout.SOUTH);
+            dialog2.pack();
+            dialog2.setLocationRelativeTo(dialog2.getOwner());
+        }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - rarcher
-    private JMenuBar menuBar1;
-    private JMenu menu1;
-    private JMenuItem menuItem1;
     private JScrollPane scrollPane1;
     private JTable table1;
     private JPanel panel1;
@@ -329,6 +332,9 @@ public class Purchase extends JFrame {
     private JTextField textField1;
     private JLabel label17;
     private JLabel label18;
+    private JDialog dialog2;
+    private JLabel label22;
+    private JButton button3;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
     Object[][] arr;
     private String selectName = "";

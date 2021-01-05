@@ -30,12 +30,20 @@ public class WorkerC extends JFrame {
         // TODO add your code here
     }
 
-    private void searchActionPerformed(ActionEvent e) throws SQLException {
+    private void searchActionPerformed(ActionEvent e)  {
         if(searchedit.getText().equals("")){
-            Dialog3.setVisible(true);
+            try {
+                initTableAll(table1);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
         else{
-            initTable(table1,comboBox1.getSelectedItem().toString(),searchedit.getText());
+            try {
+                initTable(table1,comboBox1.getSelectedItem().toString(),searchedit.getText());
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
     }
 
@@ -72,7 +80,7 @@ public class WorkerC extends JFrame {
     }
 
     private void button8ActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        this.dispose();
     }
     private void initTable(JTable table1,String type,String check) throws SQLException {
 
@@ -86,6 +94,35 @@ public class WorkerC extends JFrame {
         arr = new Object[100][6];
         int j=0;
         ResultSet rs =  DBManager.getINSTANCE().executeQuery("select * from worker where "+ type + " = \"" + check + "\"");
+        while(rs.next()) {
+            arr[j][0] = rs.getString("WorkerID");
+            arr[j][1] = rs.getString("WorkerName");
+            arr[j][2] = rs.getString("WorkerSex");
+            arr[j][3]= rs.getString("WorkerType");
+            arr[j][4]= rs.getString("WorkerPhone");
+            arr[j][5]= rs.getString("WorkerPassword");
+            //System.out.println(arr[0][0]);
+            j++;
+        }
+
+        for (Object[] i : arr)
+            model.addRow(i);
+        table1.setEnabled(false);
+
+    }
+
+    private void initTableAll(JTable table1) throws SQLException {
+
+        String[] list = {"员工ID", "员工姓名","员工性别","员工类型","员工电话","员工密码"};
+        DefaultTableModel model = (DefaultTableModel) table1.getModel();
+        model.setRowCount(0);
+        model.setColumnCount(0);
+        for(String i : list)
+            model.addColumn(i);
+        Object[][] arr;
+        arr = new Object[100][6];
+        int j=0;
+        ResultSet rs =  DBManager.getINSTANCE().executeQuery("select * from worker");
         while(rs.next()) {
             arr[j][0] = rs.getString("WorkerID");
             arr[j][1] = rs.getString("WorkerName");
@@ -119,7 +156,7 @@ public class WorkerC extends JFrame {
     }
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - unknown
+        // Generated using JFormDesigner Evaluation license - rarcher
         menuBar1 = new JMenuBar();
         menu1 = new JMenu();
         menuItem2 = new JMenuItem();
@@ -175,12 +212,12 @@ public class WorkerC extends JFrame {
 
             //======== panel2 ========
             {
-                panel2.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.
-                border.EmptyBorder(0,0,0,0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion",javax.swing.border.TitledBorder.CENTER
-                ,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("D\u0069alog",java.awt.Font
-                .BOLD,12),java.awt.Color.red),panel2. getBorder()));panel2. addPropertyChangeListener(
-                new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062order"
-                .equals(e.getPropertyName()))throw new RuntimeException();}});
+                panel2.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder
+                ( 0, 0, 0, 0) , "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e", javax. swing. border. TitledBorder. CENTER, javax. swing. border
+                . TitledBorder. BOTTOM, new java .awt .Font ("Dialo\u0067" ,java .awt .Font .BOLD ,12 ), java. awt
+                . Color. red) ,panel2. getBorder( )) ); panel2. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void
+                propertyChange (java .beans .PropertyChangeEvent e) {if ("borde\u0072" .equals (e .getPropertyName () )) throw new RuntimeException( )
+                ; }} );
                 panel2.setLayout(new BorderLayout());
 
                 //======== panel3 ========
@@ -194,13 +231,7 @@ public class WorkerC extends JFrame {
 
                     //---- search ----
                     search.setText("\u67e5\u8be2");
-                    search.addActionListener(e -> {
-                        try {
-                            searchActionPerformed(e);
-                        } catch (SQLException ex) {
-                            ex.printStackTrace();
-                        }
-                    });
+                    search.addActionListener(e -> searchActionPerformed(e));
                     panel3.add(search, BorderLayout.EAST);
 
                     //---- label1 ----
@@ -256,11 +287,7 @@ public class WorkerC extends JFrame {
 
             //---- button8 ----
             button8.setText("\u8fd4\u56de\u67e5\u8be2\u754c\u9762");
-            button8.addActionListener(e -> {
-			button2ActionPerformed(e);
-			button5ActionPerformed(e);
-			button8ActionPerformed(e);
-		});
+            button8.addActionListener(e -> button8ActionPerformed(e));
             Dialog3ContentPane.add(button8, BorderLayout.PAGE_END);
 
             //---- label7 ----
@@ -275,7 +302,7 @@ public class WorkerC extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - unknown
+    // Generated using JFormDesigner Evaluation license - rarcher
     private JMenuBar menuBar1;
     private JMenu menu1;
     private JMenuItem menuItem2;

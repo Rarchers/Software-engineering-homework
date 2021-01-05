@@ -45,7 +45,7 @@ public class Judge extends JFrame {
         textField2.setText("");
     }
 
-    private void button5ActionPerformed(ActionEvent e) throws SQLException {
+    private void button5ActionPerformed(ActionEvent e){
         System.out.println("cool");
         dialog1.setVisible(true);
         String Medname = textField1.getText();
@@ -91,24 +91,30 @@ public class Judge extends JFrame {
 
     }
 
-    private void button6ActionPerformed(ActionEvent e) throws SQLException {
+    private void button6ActionPerformed(ActionEvent e)  {
         Dialog2.dispose();
-        ResultSet rs =  DBManager.getINSTANCE().executeQuery("select * from Drug where MedName = \""+textField1.getText()+"\"");
-        if(rs.next()){
-            int num = rs.getInt("Num");
-            System.out.println(num);
-            int sells= Integer.parseInt(textField4.getText());
-            System.out.println(sells);
-            int unum = num - sells;
-            System.out.println(unum);
-            boolean res = DBManager.getINSTANCE().executeUpdate("update Drug set Num = \"" + unum + "\" where MedName = \"" + textField1.getText() + "\"");
-            if(res){
-                Dialog9.setVisible(true);
+        ResultSet rs = null;
+        try {
+            rs = DBManager.getINSTANCE().executeQuery("select * from Drug where MedName = \""+textField1.getText()+"\"");
+            if(rs.next()){
+                int num = rs.getInt("Num");
+                System.out.println(num);
+                int sells= Integer.parseInt(textField4.getText());
+                System.out.println(sells);
+                int unum = num - sells;
+                System.out.println(unum);
+                boolean res = DBManager.getINSTANCE().executeUpdate("update Drug set Num = \"" + unum + "\" where MedName = \"" + textField1.getText() + "\"");
+                if(res){
+                    Dialog9.setVisible(true);
+                }
+                else{
+                    Dialog2.setVisible(true);
+                }
             }
-            else{
-                Dialog2.setVisible(true);
-            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
+
     }
 
     private void button7ActionPerformed(ActionEvent e) {
@@ -117,85 +123,97 @@ public class Judge extends JFrame {
 
     }
 
-    private void button3ActionPerformed(ActionEvent e) throws SQLException {
+    private void button3ActionPerformed(ActionEvent e){
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date data = new Date(System.currentTimeMillis());
         String sql = "insert into orders (CustomerID,MedName,MedTime,WorkerID) values (\""+textField3.getText()+"\",\""+textField1.getText()+"\",\""+formatter.format(data)+"\",\""+textField2.getText()+"\")";
-        boolean res = DBManager.getINSTANCE().executeUpdate(sql);
-        if(res){
-
-            res = DBManager.getINSTANCE().executeUpdate("insert into sell (CustomerID,MedName,SellTime,SellNum) values (\""+textField3.getText()+"\",\""+textField1.getText()+"\",\""+formatter.format(data)+"\",\""+textField4.getText()+"\")");
+        boolean res = false;
+        try {
+            res = DBManager.getINSTANCE().executeUpdate(sql);
             if(res){
-                ResultSet rs =  DBManager.getINSTANCE().executeQuery("select * from Drug where MedName = \""+textField1.getText()+"\"");
-                if(rs.next()){
-                    int num = rs.getInt("Num");
-                    System.out.println(num);
-                    int sells= Integer.parseInt(textField4.getText());
-                    System.out.println(sells);
-                    int unum = num - sells;
-                    System.out.println(unum);
-                    res = DBManager.getINSTANCE().executeUpdate("update Drug set Num = \"" + unum + "\" where MedName = \"" + textField1.getText() + "\"");
-                    if(res){
-                        Dialog9.setVisible(true);
+
+                res = DBManager.getINSTANCE().executeUpdate("insert into sell (CustomerID,MedName,SellTime,SellNum) values (\""+textField3.getText()+"\",\""+textField1.getText()+"\",\""+formatter.format(data)+"\",\""+textField4.getText()+"\")");
+                if(res){
+                    ResultSet rs =  DBManager.getINSTANCE().executeQuery("select * from Drug where MedName = \""+textField1.getText()+"\"");
+                    if(rs.next()){
+                        int num = rs.getInt("Num");
+                        System.out.println(num);
+                        int sells= Integer.parseInt(textField4.getText());
+                        System.out.println(sells);
+                        int unum = num - sells;
+                        System.out.println(unum);
+                        res = DBManager.getINSTANCE().executeUpdate("update Drug set Num = \"" + unum + "\" where MedName = \"" + textField1.getText() + "\"");
+                        if(res){
+                            Dialog9.setVisible(true);
+                        }
+                        else{
+                            Dialog2.setVisible(true);
+                        }
                     }
-                    else{
-                        Dialog2.setVisible(true);
-                    }
+                }
+                else{
+                    Dialog11.setVisible(true);
                 }
             }
             else{
-                Dialog11.setVisible(true);
+                Dialog10.setVisible(true);
             }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
-        else{
-            Dialog10.setVisible(true);
-        }
+
     }
 
     private void button4ActionPerformed(ActionEvent e) {
         // TODO add your code here
     }
 
-    private void button1ActionPerformed(ActionEvent e) throws SQLException {
+    private void button1ActionPerformed(ActionEvent e){
         String ID = textField3.getText();
         String ID1= textField2.getText();
         String Medname = textField1.getText();
-        ResultSet rs =  DBManager.getINSTANCE().executeQuery("select * from Customer where CustomerID = \""+ID+"\"");
-        if(rs.next()) {
-            rs =  DBManager.getINSTANCE().executeQuery("select * from worker where WorkerID = \""+ID1+"\"");
-            if(rs.next()){
-                if(rs.getString("WorkerType").equals("药师")){
-                    if(textField4.getText().equals(""))
-                    {
-                        Dialog6.setVisible(true);
-                    }
-                    else{
-                        rs =  DBManager.getINSTANCE().executeQuery("select * from Drug where MedName = \""+Medname+"\"");
-                        if(rs.next()){
-                            dialog2.setVisible(true);
-                            initTable1(table2);
+        ResultSet rs = null;
+        try {
+            rs = DBManager.getINSTANCE().executeQuery("select * from Customer where CustomerID = \""+ID+"\"");
+
+            if(rs.next()) {
+                rs =  DBManager.getINSTANCE().executeQuery("select * from worker where WorkerID = \""+ID1+"\"");
+                if(rs.next()){
+                    if(rs.getString("WorkerType").equals("药师")){
+                        if(textField4.getText().equals(""))
+                        {
+                            Dialog6.setVisible(true);
                         }
                         else{
-                            Dialog5.setVisible(true);
-                        }
+                            rs =  DBManager.getINSTANCE().executeQuery("select * from Drug where MedName = \""+Medname+"\"");
+                            if(rs.next()){
+                                dialog2.setVisible(true);
+                                initTable1(table2);
+                            }
+                            else{
+                                Dialog5.setVisible(true);
+                            }
 
+                        }
+                    }
+                    else{
+                        Dialog4.setVisible(true);
                     }
                 }
                 else{
                     Dialog4.setVisible(true);
                 }
             }
-            else{
-                Dialog4.setVisible(true);
+            else
+            {
+                Dialog3.setVisible(true);
             }
-        }
-        else
-        {
-            Dialog3.setVisible(true);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
 
-    private void initTable1(JTable table2) throws SQLException {
+    private void initTable1(JTable table2)  {
 
         String[] list = {"顾客ID","药品名称","药品数量","药师ID"};
         DefaultTableModel model = (DefaultTableModel) table2.getModel();
@@ -239,19 +257,58 @@ public class Judge extends JFrame {
         textField1.setText("");
     }
 
-    private void button15ActionPerformed(ActionEvent e) throws SQLException {
+    private void button15ActionPerformed(ActionEvent e)  {
         Dialog10.dispose();
         Date data = new Date(System.currentTimeMillis());
         String sql = "insert into orders (CustomerID,MedName,MedTime,WorkerID) values (\""+textField3.getText()+"\",\""+textField1.getText()+"\",\""+data+"\",\""+textField2.getText()+"\")";
-        boolean res = DBManager.getINSTANCE().executeUpdate(sql);
-        if(res){
+        boolean res = false;
+        try {
+            res = DBManager.getINSTANCE().executeUpdate(sql);
+            if(res){
+                res = DBManager.getINSTANCE().executeUpdate("insert into sell (MedID,MedName,SellTime,SellNum) values (\""+textField3.getText()+"\",\""+textField1.getText()+"\",\""+data+"\",\""+textField4.getText()+"\")");
+                if(res){
+                    ResultSet rs =  DBManager.getINSTANCE().executeQuery("select * from Drug where MedName = \""+textField1.getText()+"\"");
+                    if(rs.next()){
+                        int num = rs.getInt("Num");
+                        int sells= Integer.parseInt(textField4.getText());
+                        int unum = num - sells;
+                        res = DBManager.getINSTANCE().executeUpdate("update Drug set Num = \"" + unum + "\" where MedName = \"" + textField1.getText() + "\"");
+                        if(res){
+                            Dialog9.setVisible(true);
+                        }
+                        else{
+                            Dialog2.setVisible(true);
+                        }
+                    }
+                }
+                else{
+                    Dialog2.setVisible(true);
+                }
+            }
+            else{
+                Dialog2.setVisible(true);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
+
+    private void button17ActionPerformed(ActionEvent e)  {
+        Dialog11.dispose();
+        Date data = new Date(System.currentTimeMillis());
+        boolean res = false;
+        try {
             res = DBManager.getINSTANCE().executeUpdate("insert into sell (MedID,MedName,SellTime,SellNum) values (\""+textField3.getText()+"\",\""+textField1.getText()+"\",\""+data+"\",\""+textField4.getText()+"\")");
             if(res){
                 ResultSet rs =  DBManager.getINSTANCE().executeQuery("select * from Drug where MedName = \""+textField1.getText()+"\"");
                 if(rs.next()){
                     int num = rs.getInt("Num");
+                    System.out.println(num);
                     int sells= Integer.parseInt(textField4.getText());
+                    System.out.println(sells);
                     int unum = num - sells;
+                    System.out.println(unum);
                     res = DBManager.getINSTANCE().executeUpdate("update Drug set Num = \"" + unum + "\" where MedName = \"" + textField1.getText() + "\"");
                     if(res){
                         Dialog9.setVisible(true);
@@ -264,37 +321,10 @@ public class Judge extends JFrame {
             else{
                 Dialog2.setVisible(true);
             }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
-        else{
-            Dialog2.setVisible(true);
-        }
-    }
 
-    private void button17ActionPerformed(ActionEvent e) throws SQLException {
-        Dialog11.dispose();
-        Date data = new Date(System.currentTimeMillis());
-        boolean res = DBManager.getINSTANCE().executeUpdate("insert into sell (MedID,MedName,SellTime,SellNum) values (\""+textField3.getText()+"\",\""+textField1.getText()+"\",\""+data+"\",\""+textField4.getText()+"\")");
-        if(res){
-            ResultSet rs =  DBManager.getINSTANCE().executeQuery("select * from Drug where MedName = \""+textField1.getText()+"\"");
-            if(rs.next()){
-                int num = rs.getInt("Num");
-                System.out.println(num);
-                int sells= Integer.parseInt(textField4.getText());
-                System.out.println(sells);
-                int unum = num - sells;
-                System.out.println(unum);
-                res = DBManager.getINSTANCE().executeUpdate("update Drug set Num = \"" + unum + "\" where MedName = \"" + textField1.getText() + "\"");
-                if(res){
-                    Dialog9.setVisible(true);
-                }
-                else{
-                    Dialog2.setVisible(true);
-                }
-            }
-        }
-        else{
-            Dialog2.setVisible(true);
-        }
     }
 
     private void button12ActionPerformed(ActionEvent e) {
@@ -324,9 +354,14 @@ public class Judge extends JFrame {
         this.dispose();
         new Judge().setVisible(true);
     }
+
+    private void menuItem2ActionPerformed(ActionEvent e) {
+        new StockView().setVisible(true);
+        this.dispose();
+    }
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - unknown
+        // Generated using JFormDesigner Evaluation license - rarcher
         menuBar1 = new JMenuBar();
         menu1 = new JMenu();
         menuItem1 = new JMenuItem();
@@ -412,6 +447,7 @@ public class Judge extends JFrame {
 
                 //---- menuItem2 ----
                 menuItem2.setText("\u836f\u54c1\u67e5\u8be2");
+                menuItem2.addActionListener(e -> menuItem2ActionPerformed(e));
                 menu1.add(menuItem2);
             }
             menuBar1.add(menu1);
@@ -426,23 +462,17 @@ public class Judge extends JFrame {
 
         //======== panel5 ========
         {
-            panel5.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.
-            EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing.border.TitledBorder.CENTER,javax.swing
-            .border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog",java.awt.Font.BOLD,12),
-            java.awt.Color.red),panel5. getBorder()));panel5. addPropertyChangeListener(new java.beans.PropertyChangeListener()
-            {@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062ord\u0065r".equals(e.getPropertyName()))
-            throw new RuntimeException();}});
+            panel5.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .
+            EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e" , javax. swing .border . TitledBorder. CENTER ,javax . swing
+            . border .TitledBorder . BOTTOM, new java. awt .Font ( "D\u0069al\u006fg", java .awt . Font. BOLD ,12 ) ,
+            java . awt. Color .red ) ,panel5. getBorder () ) ); panel5. addPropertyChangeListener( new java. beans .PropertyChangeListener ( )
+            { @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062or\u0064er" .equals ( e. getPropertyName () ) )
+            throw new RuntimeException( ) ;} } );
             panel5.setLayout(new GridLayout(0, 2));
 
             //---- button1 ----
             button1.setText("OK");
-            button1.addActionListener(e -> {
-                try {
-                    button1ActionPerformed(e);
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            });
+            button1.addActionListener(e -> button1ActionPerformed(e));
             panel5.add(button1);
 
             //---- button2 ----
@@ -489,13 +519,7 @@ public class Judge extends JFrame {
                 //---- button5 ----
                 button5.setText("\u9009\u62e9\u836f\u54c1\u578b\u53f7");
                 button5.setFont(button5.getFont().deriveFont(button5.getFont().getSize() + 3f));
-                button5.addActionListener(e -> {
-                    try {
-                        button5ActionPerformed(e);
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                    }
-                });
+                button5.addActionListener(e -> button5ActionPerformed(e));
                 panel3.add(button5);
             }
             panel1.add(panel3);
@@ -537,13 +561,13 @@ public class Judge extends JFrame {
 
             //======== panel6 ========
             {
-                panel6.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax.
-                swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border
-                . TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog"
-                ,java .awt .Font .BOLD ,12 ), java. awt. Color. red) ,panel6. getBorder
-                ( )) ); panel6. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java
-                .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException
-                ( ); }} );
+                panel6.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax
+                . swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn" , javax. swing
+                .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .
+                Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,java . awt. Color .red
+                ) ,panel6. getBorder () ) ); panel6. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override
+                public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062ord\u0065r" .equals ( e. getPropertyName (
+                ) ) )throw new RuntimeException( ) ;} } );
                 panel6.setLayout(new GridLayout(1, 1));
 
                 //======== scrollPane2 ========
@@ -599,23 +623,18 @@ public class Judge extends JFrame {
 
             //======== panel11 ========
             {
-                panel11.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
-                EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing
-                . border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ),
-                java. awt. Color. red) ,panel11. getBorder( )) ); panel11. addPropertyChangeListener (new java. beans. PropertyChangeListener( )
-                { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () ))
-                throw new RuntimeException( ); }} );
+                panel11.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax
+                . swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmDes\u0069gner \u0045valua\u0074ion" , javax. swing
+                .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .
+                Font ( "D\u0069alog", java .awt . Font. BOLD ,12 ) ,java . awt. Color .red
+                ) ,panel11. getBorder () ) ); panel11. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override
+                public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062order" .equals ( e. getPropertyName (
+                ) ) )throw new RuntimeException( ) ;} } );
                 panel11.setLayout(new GridLayout(1, 2));
 
                 //---- button6 ----
                 button6.setText("\u518d\u6b21\u5c1d\u8bd5");
-                button6.addActionListener(e -> {
-                    try {
-                        button6ActionPerformed(e);
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                    }
-                });
+                button6.addActionListener(e -> button6ActionPerformed(e));
                 panel11.add(button6);
 
                 //---- button7 ----
@@ -635,13 +654,12 @@ public class Judge extends JFrame {
 
             //======== panel9 ========
             {
-                panel9.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax.
-                swing. border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border
-                . TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog"
-                ,java .awt .Font .BOLD ,12 ), java. awt. Color. red) ,panel9. getBorder
-                ( )) ); panel9. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java
-                .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException
-                ( ); }} );
+                panel9.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder
+                ( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing. border
+                . TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
+                . Color. red) ,panel9. getBorder( )) ); panel9. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void
+                propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( )
+                ; }} );
                 panel9.setLayout(new BorderLayout());
 
                 //======== scrollPane3 ========
@@ -668,13 +686,7 @@ public class Judge extends JFrame {
 
                 //---- button3 ----
                 button3.setText("OK");
-                button3.addActionListener(e -> {
-                    try {
-                        button3ActionPerformed(e);
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                    }
-                });
+                button3.addActionListener(e -> button3ActionPerformed(e));
                 panel10.add(button3);
 
                 //---- button4 ----
@@ -781,23 +793,17 @@ public class Judge extends JFrame {
 
             //======== panel12 ========
             {
-                panel12.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder
-                ( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing. border
-                . TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
-                . Color. red) ,panel12. getBorder( )) ); panel12. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void
-                propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( )
-                ; }} );
+                panel12.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing.
+                border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder. CENTER
+                , javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font
+                .BOLD ,12 ), java. awt. Color. red) ,panel12. getBorder( )) ); panel12. addPropertyChangeListener (
+                new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r"
+                .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
                 panel12.setLayout(new GridLayout(1, 2));
 
                 //---- button15 ----
                 button15.setText("\u518d\u6b21\u5c1d\u8bd5");
-                button15.addActionListener(e -> {
-                    try {
-                        button15ActionPerformed(e);
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                    }
-                });
+                button15.addActionListener(e -> button15ActionPerformed(e));
                 panel12.add(button15);
 
                 //---- button16 ----
@@ -824,24 +830,18 @@ public class Judge extends JFrame {
 
             //======== panel13 ========
             {
-                panel13.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax .
-                swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmDes\u0069gner \u0045valua\u0074ion" , javax. swing .border
-                . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "D\u0069alog"
-                , java .awt . Font. BOLD ,12 ) ,java . awt. Color .red ) ,panel13. getBorder
-                () ) ); panel13. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java
-                . beans. PropertyChangeEvent e) { if( "\u0062order" .equals ( e. getPropertyName () ) )throw new RuntimeException
-                ( ) ;} } );
+                panel13.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing
+                .border.EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing.border.TitledBorder
+                .CENTER,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog",java.
+                awt.Font.BOLD,12),java.awt.Color.red),panel13. getBorder()))
+                ;panel13. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e
+                ){if("\u0062ord\u0065r".equals(e.getPropertyName()))throw new RuntimeException();}})
+                ;
                 panel13.setLayout(new GridLayout(1, 2));
 
                 //---- button17 ----
                 button17.setText("\u518d\u6b21\u5c1d\u8bd5");
-                button17.addActionListener(e -> {
-                    try {
-                        button17ActionPerformed(e);
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                    }
-                });
+                button17.addActionListener(e -> button17ActionPerformed(e));
                 panel13.add(button17);
 
                 //---- button18 ----
@@ -857,7 +857,7 @@ public class Judge extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - unknown
+    // Generated using JFormDesigner Evaluation license - rarcher
     private JMenuBar menuBar1;
     private JMenu menu1;
     private JMenuItem menuItem1;
