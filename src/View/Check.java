@@ -230,7 +230,13 @@ public class Check extends JFrame {
                 }
                 c=0;
                 DBManager.getINSTANCE().executeUpdate("insert into checks (medname,jnum,innum,workerid) values('"+c1+"',"+c2+","+c3+",'"+Worker+"')");
-                //DBManager.getINSTANCE().executeUpdate("delete form purchase where medname='"+c1+"';");
+                ResultSet rs = DBManager.getINSTANCE().executeQuery("select * from purchase where medname='"+c1+"'");
+                int id=0 ;
+                if(rs.next())
+                {
+                    id = rs.getInt("id");
+                }
+                DBManager.getINSTANCE().executeUpdate("delete from purchase where id="+id);
                 if(c4!=0){//退货清单
                     DBManager.getINSTANCE().executeUpdate("insert into returngoods (medname,OutNum,reason,workerid) values('"+c1+"',"+c4+",'"+c5+"','"+Worker+"')");
                 }

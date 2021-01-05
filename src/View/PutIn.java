@@ -127,7 +127,13 @@ public class PutIn extends JFrame {
         System.out.println("insert into drug (medname,intime,outtime,num) values('"+selectName+"','"+intime+"','"+outime+"',"+num+")");
         try{//填入药品信息表
             DBManager.getINSTANCE().executeUpdate("insert into drug (medid,medname,intime,outtime,num) values('"+Medid+"','"+selectName+"','"+intime+"','"+outime+"',"+num+")");
-            //DBManager.getINSTANCE().executeUpdate("delete form checks where medname='"+selectName+"'");
+            ResultSet rs = DBManager.getINSTANCE().executeQuery("select * from checks where medname='"+selectName+"'");
+            int id=0 ;
+            if(rs.next())
+            {
+                id = rs.getInt("id");
+            }
+            DBManager.getINSTANCE().executeUpdate("delete from checks where id="+id);
         }catch (Exception q){
             q.printStackTrace();
         }
