@@ -1,10 +1,7 @@
 
 import Been.DrugBeen;
 import Model.DBManager;
-import View.Check;
-import View.CommonUse;
-import View.LoginView;
-import View.StockView;
+import View.*;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -49,7 +46,7 @@ public class Test {
             i++;
         }*/
 
-        new LoginView().setVisible(true);
+        new Check().setVisible(true);
 
 
 
