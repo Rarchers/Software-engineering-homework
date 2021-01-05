@@ -203,7 +203,7 @@ public class Check extends JFrame {
         Worker=textField4.getText().toString();
 
         try{
-            for(int i=0;i<rows;i++){
+            for(int i=0;i<2;i++){
                 int c2,c3,c4;
                 String c1,c5;
                 c1 = table1.getValueAt(i,c) == null ? "" :table1.getValueAt(i,c).toString();
@@ -230,6 +230,7 @@ public class Check extends JFrame {
                 }
                 c=0;
                 DBManager.getINSTANCE().executeUpdate("insert into checks (medname,jnum,innum,workerid) values('"+c1+"',"+c2+","+c3+",'"+Worker+"')");
+                //DBManager.getINSTANCE().executeUpdate("delete form purchase where medname='"+c1+"';");
                 if(c4!=0){//退货清单
                     DBManager.getINSTANCE().executeUpdate("insert into returngoods (medname,OutNum,reason,workerid) values('"+c1+"',"+c4+",'"+c5+"','"+Worker+"')");
                 }
