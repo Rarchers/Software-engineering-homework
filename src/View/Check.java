@@ -148,6 +148,8 @@ public class Check extends JFrame {
 
     private void button5ActionPerformed(ActionEvent e) {
         yanNum=Integer.parseInt(textField2.getText());
+        textField2.getText();
+        textField2.setText("");
         table1.setValueAt(yanNum,r,l);
         yanNum=0;
         dialog2.dispose();
@@ -164,10 +166,21 @@ public class Check extends JFrame {
     }
 
     private void button3ActionPerformed(ActionEvent e) {
+
         DaoNum=Integer.parseInt(textField1.getText());
+        if(DaoNum>Integer.parseInt((table1.getValueAt(r,1).toString()))){
+            DaoNum=Integer.parseInt((table1.getValueAt(r,1).toString()));
+        }
+        textField1.getText();
+        System.out.println("logd");
+        textField1.setText("");
         table1.setValueAt(DaoNum,r,l);
         DaoNum=0;
+        table1.setValueAt(0,r,(l+1));
+        table1.setValueAt("",r,(l+2));
         dialog1.dispose();
+        
+       
     }
 
     private void button8ActionPerformed(ActionEvent e) {
@@ -191,6 +204,8 @@ public class Check extends JFrame {
     }
     private void button7ActionPerformed(ActionEvent e) {
         reason=textField3.getText();
+        textField3.getText();
+        textField3.setText("");
         table1.setValueAt(reason,r,l);
         reason=null;
         dialog3.dispose();
@@ -203,7 +218,7 @@ public class Check extends JFrame {
         Worker=textField4.getText().toString();
 
         try{
-            for(int i=0;i<2;i++){
+            for(int i=0;i<rows;i++){
                 int c2,c3,c4;
                 String c1,c5;
                 c1 = table1.getValueAt(i,c) == null ? "" :table1.getValueAt(i,c).toString();
@@ -250,8 +265,15 @@ public class Check extends JFrame {
     }
 
     public String Worker;
-    private void textField4ActionPerformed(ActionEvent e) {
+    private void textField4ActionPerformed(ActionEvent e) throws SQLException {
         Worker=textField4.getText().toString();
+        ResultSet rs = DBManager.getINSTANCE().executeQuery("select * from worker where workerid='"+Worker+"'");
+        if(rs.next()==false){
+            textField4.setText("");
+            Worker="";
+            dialog4.setVisible(true);
+        }
+        
     }
 
     private void button1MouseClicked(MouseEvent e) {//刷新
@@ -260,14 +282,7 @@ public class Check extends JFrame {
     }
 
     private void button3MouseClicked(MouseEvent e) {
-        DaoNum=Integer.parseInt(textField1.getText());
-        textField1.getText();
-        textField1.setText("");
-        table1.setValueAt(DaoNum,r,l);
-        DaoNum=0;
-        table1.setValueAt(0,r,(l+1));
-        table1.setValueAt("",r,(l+2));
-        dialog1.dispose();
+       
     }
 
     private void button5MouseClicked(MouseEvent e) {
@@ -292,6 +307,25 @@ public class Check extends JFrame {
         // TODO add your code here
     }
 
+    private void button9MouseClicked(MouseEvent e) {
+        dialog1.dispose();
+        
+    }
+
+    private void button9ActionPerformed(ActionEvent e) {
+        dialog4.dispose();
+    }
+
+    private void button10ActionPerformed(ActionEvent e) throws SQLException {
+        Worker=textField4.getText().toString();
+        ResultSet rs = DBManager.getINSTANCE().executeQuery("select * from worker where workerid='"+Worker+"'");
+        if(rs.next()==false){
+            textField4.setText("");
+            Worker="";
+            dialog4.setVisible(true);
+        }
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - yufei
@@ -301,6 +335,7 @@ public class Check extends JFrame {
         button2 = new JButton();
         label14 = new JLabel();
         textField4 = new JTextField();
+        button10 = new JButton();
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
         dialog1 = new JDialog();
@@ -339,6 +374,9 @@ public class Check extends JFrame {
         panel13 = new JPanel();
         button7 = new JButton();
         button8 = new JButton();
+        dialog4 = new JDialog();
+        label15 = new JLabel();
+        button9 = new JButton();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -351,13 +389,12 @@ public class Check extends JFrame {
 
         //======== panel1 ========
         {
-            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax
-            . swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn" , javax. swing
-            .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .
-            Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,java . awt. Color .red
-            ) ,panel1. getBorder () ) ); panel1. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override
-            public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062ord\u0065r" .equals ( e. getPropertyName (
-            ) ) )throw new RuntimeException( ) ;} } );
+            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border
+            .EmptyBorder(0,0,0,0), "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e",javax.swing.border.TitledBorder.CENTER,javax
+            .swing.border.TitledBorder.BOTTOM,new java.awt.Font("D\u0069al\u006fg",java.awt.Font.BOLD,
+            12),java.awt.Color.red),panel1. getBorder()));panel1. addPropertyChangeListener(new java.beans
+            .PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062or\u0064er".equals(e.
+            getPropertyName()))throw new RuntimeException();}});
             panel1.setLayout(new GridLayout(10, 0));
 
             //---- button1 ----
@@ -387,8 +424,30 @@ public class Check extends JFrame {
             panel1.add(label14);
 
             //---- textField4 ----
-            textField4.addActionListener(e -> textField4ActionPerformed(e));
+            textField4.addActionListener(e -> {
+                try {
+                    textField4ActionPerformed(e);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                try {
+                    textField4ActionPerformed(e);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            });
             panel1.add(textField4);
+
+            //---- button10 ----
+            button10.setText("\u786e\u5b9a");
+            button10.addActionListener(e -> {
+                try {
+                    button10ActionPerformed(e);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            });
+            panel1.add(button10);
         }
         contentPane.add(panel1, BorderLayout.WEST);
 
@@ -426,13 +485,11 @@ public class Check extends JFrame {
 
             //======== panel2 ========
             {
-                panel2.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (
-                new javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e"
-                , javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM
-                , new java .awt .Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,12 )
-                , java. awt. Color. red) ,panel2. getBorder( )) ); panel2. addPropertyChangeListener (
-                new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
-                ) {if ("\u0062or\u0064er" .equals (e .getPropertyName () )) throw new RuntimeException( )
+                panel2.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder
+                ( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing. border
+                . TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
+                . Color. red) ,panel2. getBorder( )) ); panel2. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void
+                propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( )
                 ; }} );
                 panel2.setLayout(new GridLayout(3, 0));
 
@@ -467,16 +524,7 @@ public class Check extends JFrame {
 
                     //---- button3 ----
                     button3.setText("\u786e\u5b9a");
-                    button3.addActionListener(e -> {
-			button3ActionPerformed(e);
-			button3ActionPerformed(e);
-		});
-                    button3.addMouseListener(new MouseAdapter() {
-                        @Override
-                        public void mouseClicked(MouseEvent e) {
-                            button3MouseClicked(e);
-                        }
-                    });
+                    button3.addActionListener(e -> button3ActionPerformed(e));
                     panel5.add(button3);
 
                     //---- button4 ----
@@ -503,13 +551,12 @@ public class Check extends JFrame {
 
             //======== panel6 ========
             {
-                panel6.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax
-                . swing. border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing
-                . border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .
-                Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red
-                ) ,panel6. getBorder( )) ); panel6. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override
-                public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName (
-                ) )) throw new RuntimeException( ); }} );
+                panel6.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border
+                . EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder. CENTER, javax
+                . swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,
+                12 ), java. awt. Color. red) ,panel6. getBorder( )) ); panel6. addPropertyChangeListener (new java. beans
+                . PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .equals (e .
+                getPropertyName () )) throw new RuntimeException( ); }} );
                 panel6.setLayout(new GridLayout(3, 0));
 
                 //======== panel7 ========
@@ -576,11 +623,12 @@ public class Check extends JFrame {
 
             //======== panel10 ========
             {
-                panel10.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder( 0
-                , 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM
-                , new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red) ,
-                panel10. getBorder( )) ); panel10. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
-                ) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+                panel10.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
+                EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing. border. TitledBorder. CENTER, javax. swing
+                . border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,12 ),
+                java. awt. Color. red) ,panel10. getBorder( )) ); panel10. addPropertyChangeListener (new java. beans. PropertyChangeListener( )
+                { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er" .equals (e .getPropertyName () ))
+                throw new RuntimeException( ); }} );
                 panel10.setLayout(new GridLayout(3, 0));
 
                 //======== panel11 ========
@@ -634,6 +682,24 @@ public class Check extends JFrame {
             dialog3.pack();
             dialog3.setLocationRelativeTo(dialog3.getOwner());
         }
+
+        //======== dialog4 ========
+        {
+            var dialog4ContentPane = dialog4.getContentPane();
+            dialog4ContentPane.setLayout(new BorderLayout());
+
+            //---- label15 ----
+            label15.setText("\u5458\u5de5\u53f7\u4e0d\u5408\u6cd5\u8bf7\u91cd\u65b0\u586b\u5199\uff01");
+            label15.setHorizontalAlignment(SwingConstants.CENTER);
+            dialog4ContentPane.add(label15, BorderLayout.CENTER);
+
+            //---- button9 ----
+            button9.setText("\u786e\u5b9a");
+            button9.addActionListener(e -> button9ActionPerformed(e));
+            dialog4ContentPane.add(button9, BorderLayout.SOUTH);
+            dialog4.pack();
+            dialog4.setLocationRelativeTo(dialog4.getOwner());
+        }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
@@ -645,6 +711,7 @@ public class Check extends JFrame {
     private JButton button2;
     private JLabel label14;
     private JTextField textField4;
+    private JButton button10;
     private JScrollPane scrollPane1;
     private JTable table1;
     private JDialog dialog1;
@@ -683,5 +750,8 @@ public class Check extends JFrame {
     private JPanel panel13;
     private JButton button7;
     private JButton button8;
+    private JDialog dialog4;
+    private JLabel label15;
+    private JButton button9;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
