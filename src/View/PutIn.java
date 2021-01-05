@@ -56,7 +56,6 @@ public class PutIn extends JFrame {
             int count = rs1.getRow();
             rs1.close();
             ResultSet rs = DBManager.getINSTANCE().executeQuery(sql);
-
             System.out.println("[*]正在查询数据库 当前执行sql语句"+sql);
             arr = new Object[count + 1][2];
             int j = 0;

@@ -81,7 +81,6 @@ public class Check extends JFrame {
 
     public  int r;
     public int l;
-
     private void table1MouseClicked(MouseEvent e)  {
 
         r= table1.rowAtPoint(e.getPoint());
