@@ -47,7 +47,7 @@ public class Test {
             i++;
         }*/
 
-        new LoginView().setVisible(true);
+        new Check().setVisible(true);
 
 
 

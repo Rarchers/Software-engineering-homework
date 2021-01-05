@@ -25,7 +25,6 @@ new FormModel {
 					name: "button2"
 					"text": "完成"
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button2ActionPerformed", true ) )
-					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "button2MouseClicked", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label14"
@@ -33,8 +32,6 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "textField4"
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "textField4ActionPerformed", true ) )
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "textField4ActionPerformed", true ) )
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "textField4ActionPerformed", true ) )
 					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "textField4MouseClicked", true ) )
 				} )
