@@ -56,9 +56,13 @@ public class OverdueView extends JFrame {
 
     }
 
+    private void button11ActionPerformed(ActionEvent e) {
+        this.dispose();
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - rarcher
+        // Generated using JFormDesigner Evaluation license - unknown
         ResourceBundle bundle = ResourceBundle.getBundle("View.form");
         menuBar1 = new JMenuBar();
         menu1 = new JMenu();
@@ -85,6 +89,9 @@ public class OverdueView extends JFrame {
         label16 = new JLabel();
         button1 = new JButton();
         label17 = new JLabel();
+        Dialog6 = new JDialog();
+        button11 = new JButton();
+        label18 = new JLabel();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -122,13 +129,14 @@ public class OverdueView extends JFrame {
 
         //======== panel1 ========
         {
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax
-            . swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing
-            . border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .
-            Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red
-            ) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override
-            public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er" .equals (e .getPropertyName (
-            ) )) throw new RuntimeException( ); }} );
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (
+            new javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e"
+            , javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM
+            , new java .awt .Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,12 )
+            , java. awt. Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (
+            new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
+            ) {if ("\u0062or\u0064er" .equals (e .getPropertyName () )) throw new RuntimeException( )
+            ; }} );
             panel1.setLayout(new GridLayout(17, 0));
 
             //---- button2 ----
@@ -168,11 +176,31 @@ public class OverdueView extends JFrame {
         contentPane.add(label17, BorderLayout.NORTH);
         pack();
         setLocationRelativeTo(getOwner());
+
+        //======== Dialog6 ========
+        {
+            Dialog6.setAlwaysOnTop(true);
+            var Dialog6ContentPane = Dialog6.getContentPane();
+            Dialog6ContentPane.setLayout(new BorderLayout());
+
+            //---- button11 ----
+            button11.setText(bundle.getString("button11.text"));
+            button11.addActionListener(e -> button11ActionPerformed(e));
+            Dialog6ContentPane.add(button11, BorderLayout.PAGE_END);
+
+            //---- label18 ----
+            label18.setText(bundle.getString("label18.text"));
+            label18.setFont(label18.getFont().deriveFont(label18.getFont().getSize() + 1f));
+            label18.setHorizontalAlignment(SwingConstants.CENTER);
+            Dialog6ContentPane.add(label18, BorderLayout.CENTER);
+            Dialog6.setSize(200, 195);
+            Dialog6.setLocationRelativeTo(null);
+        }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - rarcher
+    // Generated using JFormDesigner Evaluation license - unknown
     private JMenuBar menuBar1;
     private JMenu menu1;
     private JMenuItem menuItem1;
@@ -198,6 +226,9 @@ public class OverdueView extends JFrame {
     private JLabel label16;
     private JButton button1;
     private JLabel label17;
+    private JDialog Dialog6;
+    private JButton button11;
+    private JLabel label18;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
     Object[][] arr;
 

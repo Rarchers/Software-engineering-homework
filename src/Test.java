@@ -46,8 +46,22 @@ public class Test {
             if (res) System.out.println("第 "+i+" 条数据插入成功");
             i++;
         }*/
+        ResultSet rs =  DBManager.getINSTANCE().executeQuery("select * from worker");
+        while (rs.next()){
+            String workerID = rs.getString("WorkerID");
+            String workerName = rs.getString("WorkerName");
+            String workerType = rs.getString("WorkerType");
+            String workerPassword = rs.getString("WorkerPassword");
+            System.out.println(workerID+" "+workerName+" "+workerPassword+" "+workerType);
+        }
+        rs =  DBManager.getINSTANCE().executeQuery("select * from Customer");
+        while (rs.next()){
+            String workerID = rs.getString("CustomerID");
+            String workerName = rs.getString("CustomerName");
+            System.out.println(workerID+" "+workerName);
+        }
 
-        new Check().setVisible(true);
+        new LoginView().setVisible(true);
 
 
 

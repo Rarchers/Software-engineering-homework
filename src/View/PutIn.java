@@ -172,6 +172,7 @@ public class PutIn extends JFrame {
     }
 
     private void menuItem1ActionPerformed(ActionEvent e) {
+        this.dispose();
         LoginView lo=new LoginView();
         lo.setVisible(true);
     }
