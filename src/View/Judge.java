@@ -340,10 +340,8 @@ public class Judge extends JFrame {
     private void button14ActionPerformed(ActionEvent e) {
         dialog2.dispose();
         Dialog9.dispose();
-        textField3.setText("");
         textField1.setText("");
         textField4.setText("");
-        textField2.setText("");
     }
 
     private void button16ActionPerformed(ActionEvent e) {

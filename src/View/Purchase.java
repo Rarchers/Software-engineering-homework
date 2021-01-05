@@ -78,7 +78,7 @@ public class Purchase extends JFrame {
     }
 
     private void button2ActionPerformed(ActionEvent e) {
-        new JDialog().setVisible(true);
+        dialog2.setVisible(true);
 
     }
 
