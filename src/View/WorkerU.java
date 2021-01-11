@@ -573,6 +573,7 @@ public class WorkerU extends JFrame {
             label10.setHorizontalAlignment(SwingConstants.CENTER);
             Dialog5ContentPane.add(label10, BorderLayout.CENTER);
 
+
             //======== panel11 ========
             {
                 panel11.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing
