@@ -20,10 +20,13 @@ import java.sql.SQLException;
  * @author unknown
  */
 public class WorkerU extends JFrame {
+    public static String IDnumber;
     public WorkerU() {
         initComponents();
     }
-
+    public WorkerU(String zhanghao) {
+        IDnumber = zhanghao;
+    }
     private void table1MouseClicked(MouseEvent e) {
         // TODO add your code here
     }
@@ -39,7 +42,7 @@ public class WorkerU extends JFrame {
 
     private void button6ActionPerformed(ActionEvent e) {
         textField3.setText("");
-        Dialog2.dispose();
+        Dialog6.dispose();
     }
 
     private void button7ActionPerformed(ActionEvent e) {
@@ -166,7 +169,12 @@ public class WorkerU extends JFrame {
         String ID = textField3.getText();
         ResultSet rs =  DBManager.getINSTANCE().executeQuery("select * from worker where WorkerID = \""+ID+"\"");
         if(rs.next()) {
-            if(comboBox2.getSelectedItem().toString().equals("WorkerPhone")){
+            if(rs.getString("WorkerType").equals("管理员") && !rs.getString("WorkerID").equals(IDnumber))
+            {
+                Dialog6.setVisible(true);
+            }
+            else{
+                if(comboBox2.getSelectedItem().toString().equals("WorkerPhone")){
                 if(textField4.getText().length() == 11){
                     dialog1.setVisible(true);
                     initTable(table1,ID,comboBox2.getSelectedItem().toString(),textField4.getText());
@@ -188,7 +196,7 @@ public class WorkerU extends JFrame {
                         initTable(table1, ID, comboBox2.getSelectedItem().toString(), textField4.getText());
                     }
                 }
-
+            }
             }
         }
         else{
@@ -252,6 +260,9 @@ public class WorkerU extends JFrame {
         panel11 = new JPanel();
         button9 = new JButton();
         button10 = new JButton();
+        Dialog6 = new JDialog();
+        button11 = new JButton();
+        label11 = new JLabel();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -302,12 +313,12 @@ public class WorkerU extends JFrame {
 
         //======== panel5 ========
         {
-            panel5.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border
-            .EmptyBorder(0,0,0,0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion",javax.swing.border.TitledBorder.CENTER,javax
-            .swing.border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog",java.awt.Font.BOLD,
-            12),java.awt.Color.red),panel5. getBorder()));panel5. addPropertyChangeListener(new java.beans
-            .PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("bord\u0065r".equals(e.
-            getPropertyName()))throw new RuntimeException();}});
+            panel5.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
+            EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER, javax. swing
+            . border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ),
+            java. awt. Color. red) ,panel5. getBorder( )) ); panel5. addPropertyChangeListener (new java. beans. PropertyChangeListener( )
+            { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .getPropertyName () ))
+            throw new RuntimeException( ); }} );
             panel5.setLayout(new GridLayout(0, 2));
 
             //---- button1 ----
@@ -450,13 +461,12 @@ public class WorkerU extends JFrame {
 
             //======== panel6 ========
             {
-                panel6.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.
-                swing.border.EmptyBorder(0,0,0,0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion",javax.swing.border
-                .TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog"
-                ,java.awt.Font.BOLD,12),java.awt.Color.red),panel6. getBorder
-                ()));panel6. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java
-                .beans.PropertyChangeEvent e){if("bord\u0065r".equals(e.getPropertyName()))throw new RuntimeException
-                ();}});
+                panel6.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
+                EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e", javax. swing. border. TitledBorder. CENTER, javax. swing
+                . border. TitledBorder. BOTTOM, new java .awt .Font ("Dialo\u0067" ,java .awt .Font .BOLD ,12 ),
+                java. awt. Color. red) ,panel6. getBorder( )) ); panel6. addPropertyChangeListener (new java. beans. PropertyChangeListener( )
+                { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("borde\u0072" .equals (e .getPropertyName () ))
+                throw new RuntimeException( ); }} );
                 panel6.setLayout(new BorderLayout());
 
                 //======== scrollPane2 ========
@@ -565,11 +575,13 @@ public class WorkerU extends JFrame {
 
             //======== panel11 ========
             {
-                panel11.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder(
-                0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder
-                . BOTTOM, new java .awt .Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,12 ), java. awt. Color.
-                red) ,panel11. getBorder( )) ); panel11. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .
-                beans .PropertyChangeEvent e) {if ("\u0062or\u0064er" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+                panel11.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing
+                . border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn" , javax. swing .border . TitledBorder
+                . CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .
+                awt . Font. BOLD ,12 ) ,java . awt. Color .red ) ,panel11. getBorder () ) )
+                ; panel11. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e
+                ) { if( "\u0062ord\u0065r" .equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } )
+                ;
                 panel11.setLayout(new GridLayout(1, 2));
 
                 //---- button9 ----
@@ -591,6 +603,26 @@ public class WorkerU extends JFrame {
             Dialog5ContentPane.add(panel11, BorderLayout.SOUTH);
             Dialog5.setSize(255, 200);
             Dialog5.setLocationRelativeTo(null);
+        }
+
+        //======== Dialog6 ========
+        {
+            Dialog6.setAlwaysOnTop(true);
+            var Dialog6ContentPane = Dialog6.getContentPane();
+            Dialog6ContentPane.setLayout(new BorderLayout());
+
+            //---- button11 ----
+            button11.setText("\u8fd4\u56de\u4fe1\u606f\u4fee\u6539\u754c\u9762");
+            button11.addActionListener(e -> button6ActionPerformed(e));
+            Dialog6ContentPane.add(button11, BorderLayout.PAGE_END);
+
+            //---- label11 ----
+            label11.setText("\u60a8\u6ca1\u6709\u4fee\u6539\u6b64ID\u4fe1\u606f\u7684\u6743\u9650\uff01");
+            label11.setFont(label11.getFont().deriveFont(label11.getFont().getSize() + 1f));
+            label11.setHorizontalAlignment(SwingConstants.CENTER);
+            Dialog6ContentPane.add(label11, BorderLayout.CENTER);
+            Dialog6.setSize(200, 200);
+            Dialog6.setLocationRelativeTo(null);
         }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
@@ -647,5 +679,8 @@ public class WorkerU extends JFrame {
     private JPanel panel11;
     private JButton button9;
     private JButton button10;
+    private JDialog Dialog6;
+    private JButton button11;
+    private JLabel label11;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

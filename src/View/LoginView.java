@@ -52,11 +52,13 @@ public class LoginView extends JFrame {
                 else{
                     if(gettype(ID).equals("管理员")){
                         new WorkerC().setVisible(true);
+                        new WorkerU(textField1.getText());
                         closeAll();
                         this.dispose();
                     }
                     else{
                         if(gettype(ID).equals("药师")){
+                            new Judge(textField1.getText());
                             new Judge().setVisible(true);
                             closeAll();
                             this.dispose();
@@ -194,11 +196,13 @@ public class LoginView extends JFrame {
         //======== dialogPane ========
         {
             dialogPane.setBorder(new EmptyBorder(12, 12, 12, 12));
-            dialogPane.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .EmptyBorder (
-            0, 0 ,0 , 0) ,  "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e" , javax. swing .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder
-            . BOTTOM, new java. awt .Font ( "D\u0069al\u006fg", java .awt . Font. BOLD ,12 ) ,java . awt. Color .
-            red ) ,dialogPane. getBorder () ) ); dialogPane. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java .
-            beans. PropertyChangeEvent e) { if( "\u0062or\u0064er" .equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
+            dialogPane.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax
+            . swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing
+            . border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .
+            Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red
+            ) ,dialogPane. getBorder( )) ); dialogPane. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override
+            public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .equals (e .getPropertyName (
+            ) )) throw new RuntimeException( ); }} );
             dialogPane.setLayout(new BorderLayout());
 
             //======== contentPanel ========
@@ -303,10 +307,7 @@ public class LoginView extends JFrame {
 
             //---- button2 ----
             button2.setText("\u91cd\u65b0\u767b\u5f55");
-            button2.addActionListener(e -> {
-			button2ActionPerformed(e);
-			button2ActionPerformed(e);
-		});
+            button2.addActionListener(e -> button2ActionPerformed(e));
             DialogContentPane.add(button2, BorderLayout.PAGE_END);
 
             //---- label3 ----
@@ -330,10 +331,7 @@ public class LoginView extends JFrame {
 
             //---- button3 ----
             button3.setText("\u91cd\u65b0\u767b\u5f55");
-            button3.addActionListener(e -> {
-			button2ActionPerformed(e);
-			button3ActionPerformed(e);
-		});
+            button3.addActionListener(e -> button3ActionPerformed(e));
             Dialog1ContentPane.add(button3, BorderLayout.PAGE_END);
 
             //---- label5 ----
